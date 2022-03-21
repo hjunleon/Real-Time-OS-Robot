@@ -8,6 +8,10 @@
 #include "utils.c"
 #include "UART/uart.c"
 #include "motor/motor.c"
+#include "ultrasound/ultrasound.c"
+ 
+ 
+ unsigned int isAuto = 0;
  
 /*----------------------------------------------------------------------------
  * Application main thread
@@ -47,7 +51,12 @@ int main (void) {
   // System Initialization
   SystemCoreClockUpdate();
 	initMotor();
-	initUART2(BAUD_RATE);
+	if (isAuto){
+		initUltrasound();
+		startUltrasound();
+	} else {
+		initUART2(BAUD_RATE);
+	}
 	uint8_t rx_data;
 	
   osKernelInitialize();                 // Initialize CMSIS-RTOS
