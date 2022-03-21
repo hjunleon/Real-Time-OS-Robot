@@ -387,6 +387,31 @@
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
             </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART\uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\motor\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>ultrasound.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ultrasound\ultrasound.c</FilePath>
+            </File>
+            <File>
+              <FileName>ultrasound.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ultrasound\ultrasound.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

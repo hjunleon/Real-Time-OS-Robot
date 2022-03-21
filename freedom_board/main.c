@@ -54,6 +54,9 @@ int main (void) {
 	if (isAuto){
 		initUltrasound();
 		startUltrasound();
+		/*
+			Move the bot close enough, then make a circle turn.
+		*/
 	} else {
 		initUART2(BAUD_RATE);
 	}
