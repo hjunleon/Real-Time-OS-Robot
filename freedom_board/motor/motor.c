@@ -1,4 +1,5 @@
 # include <MKL25Z4.h>
+# include "../uart/uart.c"
 #define PTB0_Pin 0
 #define PTB1_Pin 1
 #define PTB2_Pin 2
@@ -51,29 +52,32 @@ void initMotor(void)   //initPWM
 	TPM2_C1SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB (1));
 }
 void left_motor (void *argument) {
- 
 	uint8_t rx_data;
   for (;;) {
 		rx_data = UART2_Receive_Poll();
-		if(rx_data == 0x40){
-			TPM1_C0V = 3750/2;
-			TPM1_C1V = 0;
-		} else if(rx_data == 0x41) {
+		if(rx_data == 0x40){ // Forward
+			TPM1_C0V = 3750/2;  // forward
+			TPM1_C1V = 0;  // back
+		} else if(rx_data == 0x41) {  // Backward
 			TPM1_C0V = 0;
 			TPM1_C1V = 3750/2;
-		} else if(rx_data == 0x44) {
+		} else if(rx_data == 0x44) { // double forward
 			TPM1_C0V = 3750;
 			TPM1_C1V = 0;
-		} else if(rx_data == 0x45) {
+		} else if(rx_data == 0x45) { // double backward
 			TPM1_C0V = 0;
 			TPM1_C1V = 3750;
-		} else if(rx_data == 0x48) {
+		} else if(rx_data == 0x48) {  // halt
 			TPM1_C0V = 0;
 			TPM1_C1V = 0;
 		}
 	}
 }
 
+/*
+TODO: have more discrete values (so long as within 1 byte)
+Can't spam esp32 with onchange
+*/
 void right_motor (void *argument) {
  
 	uint8_t rx_data;
