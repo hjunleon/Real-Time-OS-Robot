@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="joy.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="controller.js"></script>
+    </head>
+    <body>
+        <div class="main">
+            <div>
+                <div id="left-right" class = "joy"></div>
+            </div>
+            <div>
+                <div id="front-back" class = "joy"></div>
+            </div>
+        </div>
+    </body>
+    <style>
+        html, body{
+            margin:0;
+            padding:0;
+            height: 100%;
+            width: 100%;
+        }
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }   
+        .joy{
+            width: 200px;
+            height: 200px;
+            margin: 50px;
+        }
+    </style>
+</html>

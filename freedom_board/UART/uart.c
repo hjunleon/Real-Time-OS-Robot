@@ -1,10 +1,7 @@
 # include <MKL25Z4.h>
+#include "uart.h"
 
 
-#define BAUD_RATE 9600
-//#define UART_TX_PORTE22 22
-#define UART_RX_PORTE23 23
-#define UART2_INT_PRIO 128
 
 /*
 void UART2_Transmit_Poll(uint8_t data)
@@ -12,7 +9,6 @@ void UART2_Transmit_Poll(uint8_t data)
 	while(!(UART2->S1 & UART_S1_TDRE_MASK));
 	UART2->D = data;
 }*/
-		
 uint8_t UART2_Receive_Poll(void)
 {
 	while(!(UART2->S1 & UART_S1_RDRF_MASK));

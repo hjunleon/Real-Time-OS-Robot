@@ -3,13 +3,13 @@
 #include <stdlib.h>
 
 #include "ultrasound.h"
-#include "../utils.c"
+#include "../utils.h"
 
 #define ECHO_PIN 2
 #define TRIGGER_PIN 3
 #define MASK(x) (1 << (x))
 
-unsigned int cur_distance = 0;
+volatile unsigned int ultra_dist = 0;
 unsigned int echo_is_on = 0;
 unsigned int pit_ldval = 0x6fffff;  //0x2fffff   THIS IS THE DURATION THE ULTRASONIC SENSOR PINGS
 
@@ -86,7 +86,7 @@ void initTPM2() {
 	TPM2_C1SC |= TPM_CnSC_CHIE_MASK;
 	TPM2_C0V = 30; 
 		
-	NVIC_SetPriority(TPM2_IRQn, 1);
+	NVIC_SetPriority(TPM2_IRQn, 0);
 	NVIC_ClearPendingIRQ(TPM2_IRQn);
 	NVIC_EnableIRQ(TPM2_IRQn);
 }
@@ -145,7 +145,7 @@ void getDistance(void){
 * Dev note: check if magic number actually works
 */
 void timeToDistance(unsigned int duration){
-	cur_distance = duration * 0.05715;//* 0.034 / 2;
+	ultra_dist = duration * 0.05715;//* 0.034 / 2;
 }
 
 void onTrigger(void){
@@ -161,9 +161,6 @@ void TPM2_IRQHandler(void){
 		TPM2_STATUS |= TPM_STATUS_CH1F_MASK;
 		getDistance();
 	} else {
-		// Timer Overflow
-		//led_is_on = ~led_is_on;	
-		//Reset timer count value
 		TPM2_STATUS |= TPM_STATUS_TOF_MASK;
 	}
 }
@@ -211,3 +208,8 @@ void PIT_IRQHandler(void){
 	}
 	clearTIF();
 }
+
+//unsigned int extern_get_distance(void){
+//	return cur_distance;
+//}
+

@@ -1,0 +1,13 @@
+.\objects\ultrasound.o: ultrasound\ultrasound.c
+.\objects\ultrasound.o: C:\Users\facestomperx\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h
+.\objects\ultrasound.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ultrasound.o: C:\Users\facestomperx\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h
+.\objects\ultrasound.o: C:\Users\facestomperx\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h
+.\objects\ultrasound.o: C:\Users\facestomperx\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h
+.\objects\ultrasound.o: C:\Users\facestomperx\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h
+.\objects\ultrasound.o: .\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h
+.\objects\ultrasound.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\ultrasound.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\ultrasound.o: ultrasound\ultrasound.h
+.\objects\ultrasound.o: ultrasound\../utils.h
+.\objects\ultrasound.o: C:\Users\facestomperx\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h
