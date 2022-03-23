@@ -1,6 +1,6 @@
 const Http = new XMLHttpRequest();
 const url = "http://192.168.50.106";
-const throttle_time = 200;
+const throttle_time = 0.1; //1,10,25,50,200
 
 let cur_front_back = "";
 let cur_left_right = "";
@@ -30,10 +30,10 @@ let forwardHandler = (level) => {
 }
 
 let backwardHandler = (level) => {
-    let cur_cmd = "back"+level;
+    let cur_cmd = "backward"+level;
     if (is_same_command(cur_cmd, cur_front_back)) return;
     cur_front_back = cur_cmd;
-    let this_url = form_url([url, "back",level]);//url + "forward";
+    let this_url = form_url([url, "backward",level]);//url + "forward";
     get_request(this_url)
 }
 

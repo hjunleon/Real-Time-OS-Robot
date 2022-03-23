@@ -169,7 +169,7 @@ void loop() {
     response = "RIGHT 5";
   } else if (req.indexOf("stop") != -1)
   {
-    UART_SEND(0x40);
+    UART_SEND(0x40); // or i just send level 0
     response = "STOP";
   } else if (req.indexOf("straight") != -1)
   {
