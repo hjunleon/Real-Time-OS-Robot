@@ -1,5 +1,5 @@
 const Http = new XMLHttpRequest();
-const url = "http://192.168.50.106";
+const url = "http://192.168.43.86"; //192.168.43.86, 192.168.50.106
 const throttle_time = 0.1; //1,10,25,50,200
 
 let cur_front_back = "";
@@ -131,12 +131,17 @@ window.onload = (()=>{
         let level = Math.ceil(y_pos / 20);
         if (level > 0){
             if (isBack){
-                t_backward(level);
+                // t_backward(level);
+
+                backwardHandler(level);
+
             } else {
-                t_forward(level);;
+                // t_forward(level);;
+                forwardHandler(level);
             }
         } else {
-            t_stop();
+            // t_stop();
+            stopHandler();
         }
     });
 })

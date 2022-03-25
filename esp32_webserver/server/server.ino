@@ -5,8 +5,8 @@
 #define TXD2 17
 
 // Replace with your network credentials
-const char* ssid = "Home";//"OnePlus 8 Pro";//"LAPTOP-PLPLNI3L 7241";
-const char* password = "09021964";//"31080616a22d";//"jinxjinx";
+const char* ssid = "OnePlus 8 Pro";//"OnePlus 8 Pro";//"LAPTOP-PLPLNI3L 7241";//"Home"
+const char* password = "31080616a22d";//"31080616a22d";//"jinxjinx";//09021964
 
 // Set web server port number to 80
 WiFiServer server(80);

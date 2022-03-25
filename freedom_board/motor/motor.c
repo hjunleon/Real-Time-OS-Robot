@@ -145,11 +145,12 @@ void set_motors(motor_cmd cmd) {
 			}
 		}
 	} 
+	
 	// now set registers
 	TPM0_C0V = CUR_TPM0_C0V;
 	TPM0_C1V = CUR_TPM0_C1V;
 	TPM1_C0V = CUR_TPM1_C0V;
-	TPM1_C0V = CUR_TPM1_C1V;
+	TPM1_C1V = CUR_TPM1_C1V;
 }
 
 void calc_left(uint8_t level){
@@ -215,7 +216,20 @@ void calc_right(uint8_t level){
 	side_level = level;
 
 }
-
+void calc_right_back(uint8_t level){
+	unsigned int turn_amt = level * MIN_TPM_TURN;
+	CUR_TPM1_C1V += turn_amt;
+	CUR_TPM1_C0V = 0;
+	if (turn_amt > CUR_TPM0_C1V){
+		CUR_TPM0_C0V += (turn_amt - CUR_TPM0_C0V);
+		CUR_TPM0_C1V = 0;
+	} else {
+		CUR_TPM0_C1V -= turn_amt;
+		CUR_TPM0_C0V = 0;
+	}
+	l_r_dir = RIGHT;
+	side_level = level;
+}
 void left_motor (void) {
 	uint8_t rx_data;
   for (;;) {
