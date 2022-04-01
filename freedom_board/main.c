@@ -17,12 +17,14 @@
 #define LEFT_MASK 0x6
 #define RIGHT_MASK 0x7
 #define AUTO_COMMAND 0x80
+#define NOAUTO_COMMAND 0x81
  
 unsigned int isAuto =  0;///0;
 
 #define QUEUE_SIZE 4
 osMessageQueueId_t motorMQ;
-osSemaphoreId_t autoModeSemaphore;
+osSemaphoreId_t autoStopSemaphore;
+osSemaphoreId_t autoStartSemaphore;
 osSemaphoreId_t ultrasonicSemaphore;
 
 const osThreadAttr_t uartPriority = {
@@ -32,7 +34,9 @@ const osThreadAttr_t uartPriority = {
 const osThreadAttr_t motorPriority = {
 		.priority = osPriorityAboveNormal
 };
- 
+ const osThreadAttr_t autoPriority = {
+		.priority = osPriorityHigh
+};
 /*----------------------------------------------------------------------------
  * Application main thread
  *---------------------------------------------------------------------------*/
@@ -72,8 +76,8 @@ void handle_UART(void *argument){
 	unsigned int level = 0;
 	motor_cmd motorMsg;
   for (;;) {
+		rx_data = UART2_Receive_Poll(); //0x44;//
 		if (!isAuto){
-			rx_data = UART2_Receive_Poll(); //0x44;//
 			uint8_t move = MOVEMENT(rx_data);
 			if (move == FORWARD_MASK){
 				level = get_level(rx_data);
@@ -112,10 +116,16 @@ void handle_UART(void *argument){
 				}
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			} else if (rx_data == AUTO_COMMAND) {
-				osSemaphoreRelease(autoModeSemaphore);
+				//osSemaphoreAcquire(autoStopSemaphore, 0);
+				osSemaphoreRelease(autoStartSemaphore);
+				isAuto = 1;
 			}
 		} else {
-			
+			if (rx_data == NOAUTO_COMMAND){
+				isAuto = 0;
+				osSemaphoreAcquire(autoStartSemaphore,osWaitForever);
+				//osSemaphoreRelease(autoStopSemaphore);
+			}
 		}
 		
 	}
@@ -136,19 +146,30 @@ void ultra_thread(void *argument){
 }
 
 void auto_thread(void *argument){
+	unsigned int isRun = 0;
 	for (;;) {
-		osSemaphoreAcquire(autoModeSemaphore, osWaitForever);
+		if(!isRun){
+			osSemaphoreAcquire(autoStartSemaphore, osWaitForever);
+		}
+		isRun = 1;
+		motor_cmd motorMsg;
+		motorMsg.direction = LEFT;
+		motorMsg.level = 5;
+		osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+		
+		if(!isAuto){
+			motorMsg.direction = STRAIGHT;
+			motorMsg.level = 0;
+			osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+			//motorMsg.direction = STOP;
+			//motorMsg.level = 0;
+			//osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+			osSemaphoreRelease(autoStartSemaphore);
+			isRun = 0;
+			
+		}
 	}
 }
-/*
-void brain_thread(void){
-	for(;;){
-		MessageObject_t messageObject;
-		osMessageQueueGet(brainMessageQueue, &messageObject, NULL, osWaitForever);
-		osMessageQueuePut(motorMessageQueue, &motorMessage, 0, 0);
-	}
-}
-*/
 int main (void) {
  
   // System Initialization
@@ -170,11 +191,12 @@ int main (void) {
 	}*/
   osKernelInitialize();                 // Initialize CMSIS-RTOS
 	
-	motorMQ = osMessageQueueNew(8, sizeof(motor_cmd), NULL);
-	autoModeSemaphore = osSemaphoreNew(1, 0, NULL);
+	motorMQ = osMessageQueueNew(QUEUE_SIZE, sizeof(motor_cmd), NULL);  //8
+	autoStartSemaphore = osSemaphoreNew(1, 0, NULL);
 	ultrasonicSemaphore = osSemaphoreNew(1, 0, NULL);
-	osThreadNew(handle_UART, NULL, NULL); 
+	osThreadNew(handle_UART, NULL, NULL); //NULL
 	osThreadNew(motor_thread, NULL, NULL);
+	//osThreadNew(auto_thread, NULL, NULL);
   osKernelStart();// Start thread execution
 	
 }

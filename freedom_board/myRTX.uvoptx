@@ -154,7 +154,7 @@
           <Type>0</Type>
           <LineNumber>161</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>8760</Address>
+          <Address>8904</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -164,6 +164,22 @@
           <Filename>.\ultrasound\ultrasound.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\myRTX\ultrasound/ultrasound.c\161</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>161</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>9170</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\myRTX\main.c\161</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -191,6 +207,21 @@
           <count>4</count>
           <WinNumber>1</WinNumber>
           <ItemText>move</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>isAuto</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>motorMsg</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>motorMsg.direction</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -234,6 +265,11 @@
           <WinNumber>2</WinNumber>
           <ItemText>straight_level</ItemText>
         </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>cmd.direction</ItemText>
+        </Ww>
       </WatchWindow2>
       <MemoryWindow1>
         <Mm>
@@ -254,7 +290,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
