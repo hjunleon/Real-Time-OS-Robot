@@ -9,7 +9,8 @@
 #include "UART/uart.h"
 #include "motor/motor.h"
 #include "ultrasound/ultrasound.h"
- 
+
+#include "led.h"
  
 #define MOVEMENT(x) ((uint8_t)(x)) >> 4 
 #define FORWARD_MASK 0x4
@@ -20,6 +21,7 @@
 #define NOAUTO_COMMAND 0x81
  
 unsigned int isAuto =  0;///0;
+int state = 0;// 0 for stationary & 1 for moving
 
 #define QUEUE_SIZE 4
 osMessageQueueId_t motorMQ;
@@ -85,8 +87,10 @@ void handle_UART(void *argument){
 				motorMsg.level = level;
 				if (level == 0){
 					motorMsg.direction = STOP;
+					state = 0;
 				} else {
 					motorMsg.direction = FORWARD;
+					state = 1;
 				}
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			} else if (move == BACKWARD_MASK) {
@@ -94,11 +98,14 @@ void handle_UART(void *argument){
 				motorMsg.level = level;
 				if (level == 0){
 					motorMsg.direction = STOP;
+					state = 0;
 				} else {
 					motorMsg.direction = BACKWARD;
+					state = 1;
 				}
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			} else if (move == LEFT_MASK) {
+				state = 1;
 				level = get_level(rx_data);
 				motorMsg.level = level;
 				if (level == 0){
@@ -108,6 +115,7 @@ void handle_UART(void *argument){
 				}
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			} else if (move == RIGHT_MASK) {
+				state = 1;
 				level = get_level(rx_data);
 				motorMsg.level = level;
 				if (level == 0){
@@ -174,6 +182,37 @@ void auto_thread(void *argument){
 		}
 	}
 }
+
+//_____
+void redLED_thread(void *argument){
+	for (;;) {
+		switch (state) {
+			case 1: //moving
+				redLedMove();
+			break;
+			default: //stopped
+				redLedStop();
+			break;
+				
+		}
+	}
+}
+
+void green_thread(void *argument){
+	for (;;) {
+		switch (state) {
+			case 1: //moving
+				greenLedMove();
+			break;
+			default: //stopped
+				greenLedStop();
+			break;
+				
+		}
+	}
+}
+//_____
+
 int main (void) {
  
   // System Initialization
@@ -202,6 +241,8 @@ int main (void) {
 	osThreadNew(handle_UART, NULL, &uartPriority); //NULL
 	osThreadNew(motor_thread, NULL, &motorPriority);
 	//osThreadNew(auto_thread, NULL, NULL);
+	osThreadNew(redLED_thread, NULL, NULL);
+	osThreadNew(greenLED_thread, NULL, NULL);
   osKernelStart();// Start thread execution
 	for(;;){}
 }
