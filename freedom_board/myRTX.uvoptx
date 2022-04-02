@@ -168,18 +168,34 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>161</LineNumber>
+          <LineNumber>94</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>9170</Address>
+          <Address>10584</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <Filename>.\motor\motor.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\myRTX\main.c\161</Expression>
+          <Expression>\\myRTX\motor/motor.c\94</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>78</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>10532</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\motor\motor.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\myRTX\motor/motor.c\78</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -196,30 +212,25 @@
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>rx_data</ItemText>
+          <ItemText>cmd</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>cmd</ItemText>
+          <ItemText>move</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>move</ItemText>
+          <ItemText>isAuto</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>isAuto</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
           <ItemText>motorMsg</ItemText>
         </Ww>
         <Ww>
-          <count>7</count>
+          <count>6</count>
           <WinNumber>1</WinNumber>
           <ItemText>motorMsg.direction</ItemText>
         </Ww>

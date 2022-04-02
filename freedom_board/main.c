@@ -23,12 +23,13 @@ unsigned int isAuto =  0;///0;
 
 #define QUEUE_SIZE 4
 osMessageQueueId_t motorMQ;
+osMutexId_t motorMutex;
 osSemaphoreId_t autoStopSemaphore;
 osSemaphoreId_t autoStartSemaphore;
 osSemaphoreId_t ultrasonicSemaphore;
 
 const osThreadAttr_t uartPriority = {
-		.priority = osPriorityHigh4
+		.priority = osPriorityAboveNormal//osPriorityHigh4
 };
 
 const osThreadAttr_t motorPriority = {
@@ -135,7 +136,10 @@ void motor_thread(void *argument){
 	motor_cmd motorMsg;
 	for(;;){
 		osMessageQueueGet(motorMQ, &motorMsg, NULL, osWaitForever);
+		osMutexAcquire(motorMutex,osWaitForever);
 		set_motors(motorMsg);
+		osDelay(50);
+		osMutexRelease(motorMutex);
 	}
 }
 
@@ -194,9 +198,10 @@ int main (void) {
 	motorMQ = osMessageQueueNew(QUEUE_SIZE, sizeof(motor_cmd), NULL);  //8
 	autoStartSemaphore = osSemaphoreNew(1, 0, NULL);
 	ultrasonicSemaphore = osSemaphoreNew(1, 0, NULL);
-	osThreadNew(handle_UART, NULL, NULL); //NULL
-	osThreadNew(motor_thread, NULL, NULL);
+	motorMutex = osMutexNew(NULL);
+	osThreadNew(handle_UART, NULL, &uartPriority); //NULL
+	osThreadNew(motor_thread, NULL, &motorPriority);
 	//osThreadNew(auto_thread, NULL, NULL);
   osKernelStart();// Start thread execution
-	
+	for(;;){}
 }

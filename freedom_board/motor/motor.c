@@ -7,8 +7,8 @@
 //#define PTB2_Pin 2
 //#define PTB3_Pin 3
 
-#define MY_TPM_MOD 7500
-#define MAX_TPM_VAL MY_TPM_MOD    //5626//3750
+#define MY_TPM_MOD 3750
+#define MAX_TPM_VAL MY_TPM_MOD    //7500// 5626//3750
 #define MIN_TPM_UNIT MAX_TPM_VAL/5 * 2  //750  3750
 #define BASE_TPM MAX_TPM_VAL/2
 #define MIN_TPM_TURN MAX_TPM_VAL/5 // 10
