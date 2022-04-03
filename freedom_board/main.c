@@ -54,6 +54,9 @@ const osThreadAttr_t motorPriority = {
  const osThreadAttr_t ultraPriority = {
 		.priority = osPriorityAboveNormal
 }; 
+ const osThreadAttr_t greenPriority = {
+		.priority = osPriorityAboveNormal
+}; 
 
 /*----------------------------------------------------------------------------
  * Application main thread
@@ -338,7 +341,7 @@ int main (void) {
 	osThreadNew(auto_thread, NULL, &autoPriority);
 	//osThreadNew(ultra_thread, NULL, &ultraPriority);
 	//osThreadNew(redLED_thread, NULL, NULL);
-	osThreadNew(greenLED_thread, NULL, NULL);
+	osThreadNew(greenLED_thread, NULL, &greenPriority);
   osKernelStart();// Start thread execution
 	for(;;){}
 }

@@ -1,7 +1,7 @@
 # include <MKL25Z4.h>
 # include "../motor/motor.h"
-#define PTB0_Pin 0
-#define PTB1_Pin 1
+#define PTE29_Pin 29
+#define PTE30_Pin 30
 #define PTC1_Pin 1
 #define PTC2_Pin 2
 //#define PTB2_Pin 2
@@ -28,14 +28,14 @@ volatile unsigned int CUR_TPM0_C0V = 0;
 
 void initMotor(void)   //initPWM
 {
-	SIM_SCGC5 |= SIM_SCGC5_PORTB_MASK;
+	SIM->SCGC5 |= SIM_SCGC5_PORTE_MASK;
 	SIM_SCGC5 |= SIM_SCGC5_PORTC_MASK;
 	
-	PORTB->PCR[PTB0_Pin] &= ~PORT_PCR_MUX_MASK;
-	PORTB->PCR[PTB0_Pin] |= PORT_PCR_MUX(3);
+	PORTE->PCR[PTE29_Pin] &= ~PORT_PCR_MUX_MASK;
+	PORTE->PCR[PTE29_Pin] |= PORT_PCR_MUX(3);
 
-	PORTB->PCR[PTB1_Pin] &= ~PORT_PCR_MUX_MASK;
-	PORTB->PCR[PTB1_Pin] |= PORT_PCR_MUX(3);
+	PORTE->PCR[PTE30_Pin] &= ~PORT_PCR_MUX_MASK;
+	PORTE->PCR[PTE30_Pin] |= PORT_PCR_MUX(3);
 	
 	PORTC->PCR[PTC1_Pin] &= ~PORT_PCR_MUX_MASK;
 	PORTC->PCR[PTC1_Pin] |= PORT_PCR_MUX(4);
@@ -43,16 +43,16 @@ void initMotor(void)   //initPWM
 	PORTC->PCR[PTC2_Pin] &= ~PORT_PCR_MUX_MASK;
 	PORTC->PCR[PTC2_Pin] |= PORT_PCR_MUX(4);
 	
-	SIM->SCGC6 |= SIM_SCGC6_TPM1_MASK;
+	//SIM->SCGC6 |= SIM_SCGC6_TPM1_MASK;
 	SIM->SCGC6 |= SIM_SCGC6_TPM0_MASK;
 	
 	SIM->SOPT2 &= ~SIM_SOPT2_TPMSRC_MASK;
 	SIM->SOPT2 |= SIM_SOPT2_TPMSRC(1);
 	
 	
-	TPM1->MOD = MY_TPM_MOD;
+	//TPM1->MOD = MY_TPM_MOD;
 	TPM0->MOD = MY_TPM_MOD;
-
+/*
 	TPM1->SC &= ~((TPM_SC_CMOD_MASK) | (TPM_SC_PS_MASK));
 	TPM1->SC |= (TPM_SC_CMOD(1) | TPM_SC_PS(7));
 	TPM1->SC &= ~(TPM_SC_CPWMS_MASK);
@@ -62,7 +62,7 @@ void initMotor(void)   //initPWM
 	
 	TPM1_C1SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK));
 	TPM1_C1SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB (1));
-	
+	*/
 	TPM0->SC &= ~((TPM_SC_CMOD_MASK) | (TPM_SC_PS_MASK));
 	TPM0->SC |= (TPM_SC_CMOD(1) | TPM_SC_PS(7));
 	TPM0->SC &= ~(TPM_SC_CPWMS_MASK);
@@ -72,6 +72,12 @@ void initMotor(void)   //initPWM
 	
 	TPM0_C1SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK));
 	TPM0_C1SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB (1));
+	
+	TPM0_C2SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK));
+	TPM0_C2SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB (1));
+	
+	TPM0_C3SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK));
+	TPM0_C3SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB (1));
 }
 
 void just_forward(uint8_t level){
@@ -160,8 +166,8 @@ void set_motors(motor_cmd cmd) {
 	// now set registers
 	TPM0_C0V = CUR_TPM0_C0V;
 	TPM0_C1V = CUR_TPM0_C1V;
-	TPM1_C0V = CUR_TPM1_C0V;
-	TPM1_C1V = CUR_TPM1_C1V;
+	TPM0_C2V = CUR_TPM1_C0V;
+	TPM0_C3V = CUR_TPM1_C1V;
 }
 
 void calc_right(uint8_t level){
