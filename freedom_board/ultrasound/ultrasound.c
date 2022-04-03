@@ -10,8 +10,9 @@
 #define MASK(x) (1 << (x))
 
 volatile unsigned int ultra_dist = 0;
+volatile unsigned int pit_tick = 0;
 unsigned int echo_is_on = 0;
-unsigned int pit_ldval = 0x6fffff;  //0x2fffff   THIS IS THE DURATION THE ULTRASONIC SENSOR PINGS
+unsigned int pit_ldval = 0x3fffff;  //0xfffff 0x2fffff  0x6fffff THIS IS THE DURATION THE ULTRASONIC SENSOR PINGS
 
 // TODO: Check for echo timeout
 
@@ -59,6 +60,11 @@ void startUltrasound(void){
 	initPIT();
 }
 
+void stopUltrasound(void){
+	disablePIT();
+}
+
+
 // Echo timer
 void initTPM2() {
 	SIM_SCGC6 |= SIM_SCGC6_TPM2_MASK;
@@ -99,6 +105,10 @@ void disableTPM2(void){
 
 unsigned int getTPMC1Value(void){
 	return TPM2_C1V;
+}
+
+unsigned int getUltraDist(void){
+	return ultra_dist;
 }
 
 // either works
@@ -198,12 +208,17 @@ void initPIT(void){
 	
 }
 
-
+void disablePIT(){
+	clearTIF();
+	NVIC_DisableIRQ(PIT_IRQn);
+	SIM_SCGC6 &= ~SIM_SCGC6_PIT_MASK;
+}
 
 void PIT_IRQHandler(void){
 	// clear pending interrupts
 	NVIC_ClearPendingIRQ(PIT_IRQn);
 	if (PIT_TFLG0 & PIT_TFLG_TIF_MASK) {
+		pit_tick++;
 		startMeasure();
 	}
 	clearTIF();

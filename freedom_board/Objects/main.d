@@ -16,3 +16,4 @@
 .\objects\main.o: motor/motor.h
 .\objects\main.o: C:\Users\facestomperx\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h
 .\objects\main.o: ultrasound/ultrasound.h
+.\objects\main.o: led/led.h

@@ -12,7 +12,9 @@ void initEcho(void);
 void initTrigger(void);
 void initUltrasound(void);
 void startUltrasound(void);
+void stopUltrasound(void);
 unsigned int getTPMC1Value(void);
+unsigned int getUltraDist(void);
 void startMeasure(void);
 void getDistance(void);
 void timeToDistance(unsigned int duration);
@@ -20,6 +22,7 @@ void onTrigger(void);
 void offTrigger(void);
 
 void initPIT(void);
+void disablePIT(void);
 void clearTIF(void);
 
 extern volatile unsigned int ultra_dist;//extern_get_distance(void);

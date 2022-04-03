@@ -427,6 +427,16 @@
               <FileType>5</FileType>
               <FilePath>.\motor\motor.h</FilePath>
             </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LED\led.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LED\led.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

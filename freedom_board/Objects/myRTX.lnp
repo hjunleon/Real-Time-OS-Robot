@@ -4,6 +4,7 @@
 ".\objects\utils.o"
 ".\objects\motor.o"
 ".\objects\ultrasound.o"
+".\objects\led.o"
 "C:\Users\facestomperx\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib"
 ".\objects\rtx_lib.o"
 ".\objects\rtx_config.o"

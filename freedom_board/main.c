@@ -10,7 +10,7 @@
 #include "motor/motor.h"
 #include "ultrasound/ultrasound.h"
 
-#include "led.h"
+#include "led/led.h"
  
 #define MOVEMENT(x) ((uint8_t)(x)) >> 4 
 #define FORWARD_MASK 0x4
@@ -19,9 +19,19 @@
 #define RIGHT_MASK 0x7
 #define AUTO_COMMAND 0x80
 #define NOAUTO_COMMAND 0x81
+#define DISTANCE_THRESH 300
+ //0x80, 120, 80, 200,105 130, 150, 250 just touch
+ 
  
 unsigned int isAuto =  0;///0;
+unsigned int isFirstObstacle = 0;
+unsigned int isSecondObstacle = 0;
+unsigned int cur_distance = 0xffff;
 int state = 0;// 0 for stationary & 1 for moving
+
+unsigned int low_ultra_dist_counts = 0;
+#define DISTANCE_THRESH_CNT 2
+
 
 #define QUEUE_SIZE 4
 osMessageQueueId_t motorMQ;
@@ -38,8 +48,13 @@ const osThreadAttr_t motorPriority = {
 		.priority = osPriorityAboveNormal
 };
  const osThreadAttr_t autoPriority = {
-		.priority = osPriorityHigh
+		.priority = osPriorityAboveNormal
 };
+
+ const osThreadAttr_t ultraPriority = {
+		.priority = osPriorityAboveNormal
+}; 
+
 /*----------------------------------------------------------------------------
  * Application main thread
  *---------------------------------------------------------------------------*/
@@ -105,23 +120,25 @@ void handle_UART(void *argument){
 				}
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			} else if (move == LEFT_MASK) {
-				state = 1;
 				level = get_level(rx_data);
 				motorMsg.level = level;
 				if (level == 0){
 					motorMsg.direction = STRAIGHT;
+					state = 0;
 				} else {
 					motorMsg.direction = LEFT;
+					state = 1;
 				}
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			} else if (move == RIGHT_MASK) {
-				state = 1;
 				level = get_level(rx_data);
 				motorMsg.level = level;
 				if (level == 0){
 					motorMsg.direction = STRAIGHT;
+					state = 0;
 				} else {
 					motorMsg.direction = RIGHT;
+					state = 1;
 				}
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			} else if (rx_data == AUTO_COMMAND) {
@@ -140,53 +157,141 @@ void handle_UART(void *argument){
 	}
 }
 
+#define MOTOR_CMD_PAUSE 50//50
+
 void motor_thread(void *argument){
 	motor_cmd motorMsg;
 	for(;;){
 		osMessageQueueGet(motorMQ, &motorMsg, NULL, osWaitForever);
 		osMutexAcquire(motorMutex,osWaitForever);
 		set_motors(motorMsg);
-		osDelay(50);
+		osDelay(MOTOR_CMD_PAUSE);
 		osMutexRelease(motorMutex);
 	}
 }
 
 void ultra_thread(void *argument){
 	for (;;) {
-
+		osSemaphoreAcquire(ultrasonicSemaphore,osWaitForever);
 	}
 }
+
+void just_stoppppp(){
+
+	motor_cmd motorMsg1 = create_motor_cmd(0, STOP);
+	osMessageQueuePut(motorMQ, &motorMsg1, NULL, 0 );
+	util_delay(MOTOR_CMD_PAUSE);//osDelay(MOTOR_CMD_PAUSE);
+	motor_cmd motorMsg2 = create_motor_cmd(0, STRAIGHT);
+	osMessageQueuePut(motorMQ, &motorMsg2, NULL, 0 );
+	state = 0;
+}
+#define STOP_DELAY 400 //1000 abit too long for 7.97V
+#define TURN_DELAY 475 // 500 abit beyond 90 for 7.97V
+#define HALF_TURN_DELAY 320 //300 abit too much for 7.97V
+#define FORWARD_DELAY 450  //1000 abit too much for 7.97V, 800 too much for same voltage but 10cm away
+void auto_obstacle_avoid(void){
+	motor_cmd motorMsg;
+	just_stoppppp();
+	osDelay(STOP_DELAY);
+	
+	motorMsg = create_motor_cmd(5, LEFT);
+	osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+	osDelay(HALF_TURN_DELAY);
+	state = 1;
+	
+	just_stoppppp();
+	osDelay(STOP_DELAY);
+	
+	
+	motorMsg = create_motor_cmd(5, FORWARD);
+	osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+	osDelay(TURN_DELAY);
+	state = 1;
+	
+	just_stoppppp();
+	osDelay(STOP_DELAY);
+	
+	for(uint8_t i = 0; i < 3; i += 1){		
+		motorMsg = create_motor_cmd(5, RIGHT);
+		osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+		osDelay(TURN_DELAY);
+		state = 1;
+		
+		just_stoppppp();
+		osDelay(STOP_DELAY);
+		
+		motorMsg = create_motor_cmd(5, FORWARD);
+		osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+		osDelay(FORWARD_DELAY);
+		state = 1;
+		
+		just_stoppppp();
+		osDelay(STOP_DELAY);
+	}
+	
+	motorMsg = create_motor_cmd(5, LEFT);
+	osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+	osDelay(HALF_TURN_DELAY);
+	state = 1;
+	
+	just_stoppppp();
+	osDelay(STOP_DELAY);
+}	
 
 void auto_thread(void *argument){
 	unsigned int isRun = 0;
 	for (;;) {
 		if(!isRun){
+			// for code that runs once in this loop
 			osSemaphoreAcquire(autoStartSemaphore, osWaitForever);
+			low_ultra_dist_counts  = 0;
+			startUltrasound();
+			cur_distance = 0xffff;
+			isFirstObstacle = 0;
+			isSecondObstacle = 0;
+			osDelay(2000);
 		}
 		isRun = 1;
-		motor_cmd motorMsg;
-		motorMsg.direction = LEFT;
-		motorMsg.level = 5;
-		osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 		
+		if (ultra_dist  > 5 && ultra_dist < DISTANCE_THRESH){   //ultra_dist > 40 && 
+			low_ultra_dist_counts += 1;
+			if (isFirstObstacle){
+				if (low_ultra_dist_counts >= DISTANCE_THRESH_CNT){					
+					// stop at start point
+					isSecondObstacle = 1;
+					just_stoppppp();
+					low_ultra_dist_counts = 0; 
+				}
+			} else {
+				if (low_ultra_dist_counts >= DISTANCE_THRESH_CNT){					
+					// go around obstacle
+					isFirstObstacle = 1;
+					auto_obstacle_avoid();
+					low_ultra_dist_counts = 0;
+				}
+			}
+			state = 0;
+			osDelay(1000);
+		} else{
+			low_ultra_dist_counts = 0;
+			if(!get_move_state() && !isSecondObstacle){				
+				//state = 1;
+				motor_cmd motorMsg = create_motor_cmd(2, FORWARD);
+				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+			}
+		} 
 		if(!isAuto){
-			motorMsg.direction = STRAIGHT;
-			motorMsg.level = 0;
-			osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
-			//motorMsg.direction = STOP;
-			//motorMsg.level = 0;
-			//osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+			//stopUltrasound();
 			osSemaphoreRelease(autoStartSemaphore);
 			isRun = 0;
-			
 		}
 	}
 }
-
+ 
 //_____
 void redLED_thread(void *argument){
 	for (;;) {
-		switch (state) {
+		switch (get_move_state()) {
 			case 1: //moving
 				redLedMove();
 			break;
@@ -198,9 +303,9 @@ void redLED_thread(void *argument){
 	}
 }
 
-void green_thread(void *argument){
+void greenLED_thread(void *argument){
 	for (;;) {
-		switch (state) {
+		switch (get_move_state()) {
 			case 1: //moving
 				greenLedMove();
 			break;
@@ -216,32 +321,23 @@ void green_thread(void *argument){
 int main (void) {
  
   // System Initialization
+
   SystemCoreClockUpdate();
-	//disable_motor();
 	initMotor();
+	initUltrasound();
 	initUART2(BAUD_RATE);
-	/*
-	if (isAuto){
-		//stop();
-		initUltrasound();
-		startUltrasound();
-		osThreadNew(ultra_thread, NULL, NULL);
-		
-			//Move the bot close enough, then make a circle turn.
-		
-	} else {
-		
-	}*/
+	initGreenLED();
   osKernelInitialize();                 // Initialize CMSIS-RTOS
 	
 	motorMQ = osMessageQueueNew(QUEUE_SIZE, sizeof(motor_cmd), NULL);  //8
+	motorMutex = osMutexNew(NULL);
 	autoStartSemaphore = osSemaphoreNew(1, 0, NULL);
 	ultrasonicSemaphore = osSemaphoreNew(1, 0, NULL);
-	motorMutex = osMutexNew(NULL);
 	osThreadNew(handle_UART, NULL, &uartPriority); //NULL
 	osThreadNew(motor_thread, NULL, &motorPriority);
-	//osThreadNew(auto_thread, NULL, NULL);
-	osThreadNew(redLED_thread, NULL, NULL);
+	osThreadNew(auto_thread, NULL, &autoPriority);
+	//osThreadNew(ultra_thread, NULL, &ultraPriority);
+	//osThreadNew(redLED_thread, NULL, NULL);
 	osThreadNew(greenLED_thread, NULL, NULL);
   osKernelStart();// Start thread execution
 	for(;;){}

@@ -7,9 +7,9 @@
 //#define PTB2_Pin 2
 //#define PTB3_Pin 3
 
-#define MY_TPM_MOD 3750
+#define MY_TPM_MOD 3750 //3750
 #define MAX_TPM_VAL MY_TPM_MOD    //7500// 5626//3750
-#define MIN_TPM_UNIT MAX_TPM_VAL/5 * 2  //750  3750
+#define MIN_TPM_UNIT MAX_TPM_VAL/5  //750  3750
 #define BASE_TPM MAX_TPM_VAL/2
 #define MIN_TPM_TURN MAX_TPM_VAL/5 // 10
 
@@ -74,17 +74,17 @@ void initMotor(void)   //initPWM
 	TPM0_C1SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB (1));
 }
 
-void just_forward(){
-		CUR_TPM1_C0V = MAX_TPM_VAL; //BASE_TPM + cmd.level * MIN_TPM_UNIT;
-		CUR_TPM0_C0V = MAX_TPM_VAL; // BASE_TPM + cmd.level * MIN_TPM_UNIT;
+void just_forward(uint8_t level){
+		CUR_TPM1_C0V = MIN_TPM_UNIT  * level;//MAX_TPM_VAL; //BASE_TPM + cmd.level * MIN_TPM_UNIT;
+		CUR_TPM0_C0V = MIN_TPM_UNIT  * level; // BASE_TPM + cmd.level * MIN_TPM_UNIT;
 		CUR_TPM1_C1V = 0;
 		CUR_TPM0_C1V = 0;
 		f_b_dir = FORWARD;
 }
 
-void just_backward(){
-		CUR_TPM1_C1V = MAX_TPM_VAL; // BASE_TPM + cmd.level * MIN_TPM_UNIT;
-		CUR_TPM0_C1V = MAX_TPM_VAL; //BASE_TPM + cmd.level * MIN_TPM_UNIT;
+void just_backward(uint8_t level){
+		CUR_TPM1_C1V = MIN_TPM_UNIT  * level; // BASE_TPM + cmd.level * MIN_TPM_UNIT;
+		CUR_TPM0_C1V = MIN_TPM_UNIT  * level; //BASE_TPM + cmd.level * MIN_TPM_UNIT;
 		CUR_TPM1_C0V = 0;
 		CUR_TPM0_C0V = 0;
 		f_b_dir = BACKWARD;
@@ -100,10 +100,10 @@ void just_stop(){
 
 void set_motors(motor_cmd cmd) {
 	if (cmd.direction == FORWARD){
-		just_forward();
+		just_forward(cmd.level);
 		straight_level = cmd.level;
 	} else if (cmd.direction == BACKWARD) {
-		just_backward();
+		just_backward(cmd.level);
 		straight_level = cmd.level;
 	} else if (cmd.direction == STOP){
 		//stop
@@ -111,9 +111,9 @@ void set_motors(motor_cmd cmd) {
 		straight_level = 0;
 	} else {
 		if (f_b_dir == FORWARD){
-			just_forward();
+			just_forward(straight_level);
 		} else if(f_b_dir == BACKWARD){
-			just_backward();
+			just_backward(straight_level);
 		} else {
 			just_stop();
 		}
@@ -240,4 +240,27 @@ void disable_motor(void){
 	TPM0_C0SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK));
 	
 	TPM0_C1SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK));
+}
+
+motor_cmd create_motor_cmd(uint8_t level, dir direction){
+	motor_cmd motorMsg;
+	motorMsg.level = level;
+	if (level == 0){
+		if (direction == LEFT || direction == RIGHT || direction == STRAIGHT){
+			motorMsg.direction = STRAIGHT;
+		} else {
+			motorMsg.direction = STOP;
+		}
+		
+	} else {
+		motorMsg.direction = direction;
+	}
+	return motorMsg;
+}
+
+unsigned int get_move_state(){
+	if (f_b_dir == STOP && l_r_dir == STRAIGHT){
+		return 0;
+	}
+	return 1;
 }
