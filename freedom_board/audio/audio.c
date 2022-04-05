@@ -18,10 +18,13 @@
 #define EIGTH_BEAT QUARTER_BEAT/2
 #define SIXTEENTH_BEAT EIGTH_BEAT/2
 #define DOTTED_HALF_BEAT ONE_BEAT / 1.5
+#define REST 0
 
 
 #define MUSICAL_NOTE_CNT 52
 #define END_NOTE_CNT 28
+
+audioToPlay cur_audio = CONNECT;
 
 void initPWM(void)
 {
@@ -87,12 +90,13 @@ int no_idea2[5] = {
 //int end[28] = {C,C,G,G,A,A,G,F,F,E,E,D,D,C,G,G,F,F,E,E,D,G,G,F,F,E,E,D};
  
 #define RUSSIAN_LEN 13
-#define REST 0
+#define RUSSIAN_SPEED 1
 int russian_anthem[RUSSIAN_LEN][2] = {
 	{G4, HALF_BEAT}, //1
 	{C5, ONE_BEAT}, {G4, DOTTED_HALF_BEAT}, {A4, QUARTER_BEAT}, {B4, ONE_BEAT}, {E4, DOTTED_HALF_BEAT}, {E4, QUARTER_BEAT}, // 6
 	{A4, ONE_BEAT}, {F4, DOTTED_HALF_BEAT}, {G4, QUARTER_BEAT}, {A4, ONE_BEAT}, {D4, DOTTED_HALF_BEAT}, {D4, QUARTER_BEAT}, //6
 };
+
 
 
 #define DEJAVU_LEN 130
@@ -146,44 +150,60 @@ int untitled[UNTITLED_LEN][2] = {
 	{G6, HALF_BEAT}, {A6, HALF_BEAT}, {B6, HALF_BEAT}, {A6, ONE_BEAT}
 };
 
+void play_internet_connect(void){
+	cur_audio = CONNECT;
+	play_audio();
+}
 
-void play_audio() {
-	unsigned int isFirst = 0;
-	int i = 0;
+
+void play_run(void){
+	cur_audio = RUNNING;
+	play_audio();
+}
+
+void play_end(void){
+	cur_audio = END;
+	play_audio();
+}
+
+
+void play_audio(void) {
+	//unsigned int isFirst = 0;
+	//int i = 0;
 	double speed;
 	int length;
 	int (*cur_music)[2];
-	int count = 0;
-	while(count < 2) {
-		if (isFirst){
-			int i = 0;
+	//int count = 0;
+	switch(cur_audio){
+		case(CONNECT):
+			cur_music = russian_anthem;
+			speed = RUSSIAN_SPEED;
+			length = RUSSIAN_LEN;
+			break;
+		case (RUNNING):
 			cur_music = dejavu;
 			speed = DEJAVU_SPEED;
 			length = DEJAVU_LEN;
-			isFirst = 0;
-		} else {
+			break;
+		case (END):
 			cur_music = untitled;
 			speed = UNTITLED_SPEED;
 			length = UNTITLED_LEN;
-			isFirst = 1;
-		}
-		i = 0;
-		while(i < 1) {
-			int j = 0;
-			while (j < length){			
-				int duration = speed * cur_music[j][1];
-				TPM1->MOD = cur_music[j][0];//(cur_music[j]);
-				TPM1_C0V = cur_music[j][0] / 2; //(cur_music[j])/2; 
-				//delay(duration);
-				osDelay(duration);
-				TPM1_C0V = 0;
-				//delay(duration);
-				osDelay(duration);
-				j++;
-			}
-			i++;
-		}
-		count++;
+			break;
+		default:
+			return;
+			break;
 	}
+	int j = 0;
+	while (j < length){			
+		int duration = speed * cur_music[j][1];
+		TPM1->MOD = cur_music[j][0];
+		TPM1_C0V = cur_music[j][0] / 2; 
+		osDelay(duration);
+		TPM1_C0V = 0;
+		osDelay(duration);
+		j++;
+	}
+		
 }
 		   
