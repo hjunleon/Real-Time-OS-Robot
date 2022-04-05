@@ -154,7 +154,7 @@
           <Type>0</Type>
           <LineNumber>171</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>8976</Address>
+          <Address>9116</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -236,6 +236,16 @@
           <count>13</count>
           <WinNumber>1</WinNumber>
           <ItemText>state</ItemText>
+        </Ww>
+        <Ww>
+          <count>14</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>startTrial</ItemText>
+        </Ww>
+        <Ww>
+          <count>15</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>endTrial</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -498,6 +508,42 @@
       <bDave2>0</bDave2>
       <PathWithFileName>.\LED\led.h</PathWithFileName>
       <FilenameWithoutPath>led.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>12</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\audio\music_notes.c</PathWithFileName>
+      <FilenameWithoutPath>music_notes.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>13</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\audio\audio.h</PathWithFileName>
+      <FilenameWithoutPath>audio.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>14</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\audio\audio.c</PathWithFileName>
+      <FilenameWithoutPath>audio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

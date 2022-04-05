@@ -11,8 +11,8 @@
 #include <ESPAsyncWebServer.h>
 
 // Replace with your network credentials
-const char* ssid = "Home";
-const char* password = "09021964";
+const char* ssid = "OnePlus 8 Pro";//"Home";
+const char* password = "31080616a22d";//"09021964";
 
 String response;
 bool ledState = 0;
@@ -78,6 +78,12 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
      } else if (match_string(data,"notAuto")) {
       UART_SEND(0x81);
       response = "NOT_AUTO";
+     } else if (match_string(data, "startTrial")) {
+      UART_SEND(0x21);
+      response = "STARTED TRIAL";
+     } else if (match_string(data, "endTrial")) {
+      UART_SEND(0x22);
+      response = "ENDED TRIAL";
      } else {
       UART_SEND(0x40); // or i just send level 0
       response = "STOP";
@@ -129,7 +135,8 @@ void setup(){
     delay(1000);
     Serial.println("Connecting to WiFi..");
   }
-
+  // send connected signal
+  UART_SEND(0x20);
   // Print ESP Local IP Address
   Serial.println(WiFi.localIP());
 

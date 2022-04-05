@@ -11,7 +11,8 @@
 #include "ultrasound/ultrasound.h"
 
 #include "led/led.h"
- 
+#include "audio/audio.h"
+
 #define MOVEMENT(x) ((uint8_t)(x)) >> 4 
 #define FORWARD_MASK 0x4
 #define BACKWARD_MASK 0x5
@@ -19,6 +20,9 @@
 #define RIGHT_MASK 0x7
 #define AUTO_COMMAND 0x80
 #define NOAUTO_COMMAND 0x81
+#define INTERNET_CONNECT_CMD 0x20
+#define START_TRIAL_CMD 0x21
+#define END_TRIAL_CMD 0x22
 #define DISTANCE_THRESH 300
  //0x80, 120, 80, 200,105 130, 150, 250 just touch
  
@@ -33,6 +37,11 @@ unsigned int low_ultra_dist_counts = 0;
 #define DISTANCE_THRESH_CNT 2
 
 
+unsigned int justConnected = 0;
+unsigned int startTrial = 0;
+unsigned int endTrial = 0;
+
+
 #define QUEUE_SIZE 4
 osMessageQueueId_t motorMQ;
 osMutexId_t motorMutex;
@@ -41,22 +50,27 @@ osSemaphoreId_t autoStartSemaphore;
 osSemaphoreId_t ultrasonicSemaphore;
 
 const osThreadAttr_t uartPriority = {
-		.priority = osPriorityAboveNormal//osPriorityHigh4
+		.priority = osPriorityAboveNormal//osPriorityAboveNormal//osPriorityHigh4
 };
 
 const osThreadAttr_t motorPriority = {
 		.priority = osPriorityAboveNormal
 };
  const osThreadAttr_t autoPriority = {
-		.priority = osPriorityAboveNormal
+		.priority = osPriorityAboveNormal//osPriorityAboveNormal
 };
 
- const osThreadAttr_t ultraPriority = {
-		.priority = osPriorityAboveNormal
-}; 
  const osThreadAttr_t greenPriority = {
-		.priority = osPriorityAboveNormal
+		.priority = osPriorityAboveNormal //osPriorityLow
 }; 
+ 
+ const osThreadAttr_t redPriority = {
+		.priority = osPriorityAboveNormal //osPriorityLow
+}; 
+ const osThreadAttr_t audioPriority = {
+		.priority = osPriorityAboveNormal//osPriorityNormal //osPriorityBelowNormal
+}; 
+
 
 /*----------------------------------------------------------------------------
  * Application main thread
@@ -98,6 +112,20 @@ void handle_UART(void *argument){
 	motor_cmd motorMsg;
   for (;;) {
 		rx_data = UART2_Receive_Poll(); //0x44;//
+		
+		if (rx_data == INTERNET_CONNECT_CMD){
+			justConnected = 1;
+			continue;
+		} else if (rx_data == START_TRIAL_CMD) {
+			startTrial = 1;
+			endTrial = 0;
+			continue;
+		} else if (rx_data == END_TRIAL_CMD) {
+			endTrial = 1;
+			startTrial = 0;
+			continue;
+		}
+		
 		if (!isAuto){
 			uint8_t move = MOVEMENT(rx_data);
 			if (move == FORWARD_MASK){
@@ -157,6 +185,7 @@ void handle_UART(void *argument){
 			}
 		}
 		
+		//osDelay(20);
 	}
 }
 
@@ -273,12 +302,10 @@ void auto_thread(void *argument){
 					low_ultra_dist_counts = 0;
 				}
 			}
-			state = 0;
 			osDelay(1000);
 		} else{
 			low_ultra_dist_counts = 0;
 			if(!get_move_state() && !isSecondObstacle){				
-				//state = 1;
 				motor_cmd motorMsg = create_motor_cmd(2, FORWARD);
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			}
@@ -288,6 +315,8 @@ void auto_thread(void *argument){
 			osSemaphoreRelease(autoStartSemaphore);
 			isRun = 0;
 		}
+		
+		//osDelay(20);
 	}
 }
  
@@ -303,6 +332,7 @@ void redLED_thread(void *argument){
 			break;
 				
 		}
+		//osDelay(20);
 	}
 }
 
@@ -317,6 +347,22 @@ void greenLED_thread(void *argument){
 			break;
 				
 		}
+		//osDelay(20);
+	}
+}
+
+void audio_thread(void *argument){
+	for (;;) {
+		if (justConnected == 1) {
+			play_internet_connect();
+			justConnected = 0;
+		} else if (startTrial == 1) {
+			play_run();
+		} else if (endTrial == 1) {
+			play_end();
+		}
+		//play_audio();
+		osDelay(20);
 	}
 }
 //_____
@@ -329,7 +375,9 @@ int main (void) {
 	initMotor();
 	initUltrasound();
 	initUART2(BAUD_RATE);
+	initRedLED();
 	initGreenLED();
+	initAudio();
   osKernelInitialize();                 // Initialize CMSIS-RTOS
 	
 	motorMQ = osMessageQueueNew(QUEUE_SIZE, sizeof(motor_cmd), NULL);  //8
@@ -340,8 +388,9 @@ int main (void) {
 	osThreadNew(motor_thread, NULL, &motorPriority);
 	osThreadNew(auto_thread, NULL, &autoPriority);
 	//osThreadNew(ultra_thread, NULL, &ultraPriority);
-	//osThreadNew(redLED_thread, NULL, NULL);
+	osThreadNew(redLED_thread, NULL, &redPriority);
 	osThreadNew(greenLED_thread, NULL, &greenPriority);
+	osThreadNew(audio_thread, NULL, &audioPriority);
   osKernelStart();// Start thread execution
 	for(;;){}
 }

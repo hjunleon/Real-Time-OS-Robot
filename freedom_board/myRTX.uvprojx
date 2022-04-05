@@ -437,6 +437,21 @@
               <FileType>5</FileType>
               <FilePath>.\LED\led.h</FilePath>
             </File>
+            <File>
+              <FileName>music_notes.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\audio\music_notes.c</FilePath>
+            </File>
+            <File>
+              <FileName>audio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\audio\audio.h</FilePath>
+            </File>
+            <File>
+              <FileName>audio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\audio\audio.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
