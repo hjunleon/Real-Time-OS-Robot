@@ -1,5 +1,5 @@
 //192.168.50.141
-const url = "192.168.50.250:9300";//"http://192.168.43.153"; //192.168.43.86, 192.168.50.106    http://192.168.43.153
+const url = "192.168.43.224:9300"//"192.168.50.250:9300";//"http://192.168.43.153"; //192.168.43.86, 192.168.50.106    http://192.168.43.153
 var gateway = `ws://${url}/ws`;
 
 const isMobile = window.matchMedia("only screen and (max-width: 1080px)").matches;
@@ -46,14 +46,24 @@ const forward_path = "f";
 const backward_path = "b";
 const isAuto_path = 'isAuto';
 const notAuto_path = 'notAuto';
+const isStart_path = 'startTrial';
+const isEnd_path = 'endTrial';
 
-
-let isAuto = false;
 let isAutoEl;
 let leftBtnEl;
 let rightBtnEl;
 let frontBtnEl;
 let backBtnEl;
+let toggleTrialBtnEl;
+// let endBtnEl;
+
+
+
+let isAuto = false;
+let isStartTrial = false;
+let isEndTrial = false;
+
+let active_class = "activeState";
 
 function initWebSocket() {
     console.log("Trying to open a WebSocket connection...");
@@ -81,8 +91,6 @@ function onMessage(event) {
 }
 
 let is_same_command = (cur_cmd, past_cmd) => {
-    // return false;
-    // console.log(`${cur_cmd} vs ${past_cmd}`)
     return cur_cmd.dir == past_cmd.dir && cur_cmd.level == past_cmd.level;
 }
 
@@ -99,7 +107,7 @@ let forwardHandler = (level) => {
     let cur_cmd = {
         dir:F,
         level: level
-    }//"forward"+level;
+    }
     if (is_same_command(cur_cmd, cur_front_back)) return;
     cur_front_back = cur_cmd;
     
@@ -111,7 +119,7 @@ let backwardHandler = (level) => {
     let cur_cmd = {
         dir:B,
         level: level
-    }//"forward"+level;
+    }
     if (is_same_command(cur_cmd, cur_front_back)) return;
     cur_front_back = cur_cmd;
     let this_url = form_url([backward_path,level]);//url + "forward";
@@ -119,7 +127,6 @@ let backwardHandler = (level) => {
 }
 
 let stopHandler = ()=>{
-    // let cur_cmd = "stop";
     let cur_cmd = {
         dir:STOP,
         level: 0
@@ -131,7 +138,6 @@ let stopHandler = ()=>{
 }
 
 let leftHandler = (level) => {
-    // let cur_cmd = "left"+level;
     let cur_cmd = {
         dir:L,
         level: level
@@ -143,7 +149,6 @@ let leftHandler = (level) => {
 }
 
 let rightHandler = (level) => {
-    // let cur_cmd = "right"+level;
     let cur_cmd = {
         dir:R,
         level: level
@@ -155,7 +160,6 @@ let rightHandler = (level) => {
 }
 
 let straightHandler = () => {
-    // let cur_cmd = "straight";
     let cur_cmd = {
         dir:STRAIGHT,
         level: 0
@@ -175,12 +179,13 @@ t_forward = _.throttle(forwardHandler, throttle_time);
 t_backward = _.throttle(backwardHandler, throttle_time);
 
 
-let setToggleStyle = () => {
-    let auto_class = "auto";
-    if(isAuto){
-        isAutoEl.classList.add(auto_class)
+let setToggleStyle = (btnEl, state) => {
+    console.log(btnEl)
+    console.log(`state: ${state}`)
+    if(state){
+        btnEl.classList.add(active_class)
     } else {
-        isAutoEl.classList.remove(auto_class)
+        btnEl.classList.remove(active_class)
     }
 }
 
@@ -194,9 +199,37 @@ let toggleAutoHandler = () => {
     }
     get_request(this_url);
     isAuto = !isAuto;
-    setToggleStyle();
+    setToggleStyle(isAutoEl,isAuto);
 }
 
+let toggleTrialHandler = () => {
+    let this_url = "";
+    
+    //get_request(this_url);
+    if (isStartTrial){
+        this_url = form_url([isEnd_path]);
+        toggleTrialBtnEl.innerHTML = "START";
+    } else {
+        this_url = form_url([isStart_path]);
+        toggleTrialBtnEl.innerHTML = "END";
+    }
+    get_request(this_url);
+    isStartTrial = !isStartTrial;
+    setToggleStyle(toggleTrialBtnEl, isStartTrial);
+}
+
+// let toggleEndHandler = () => {
+//     let this_url = "";
+//     this_url = form_url([isEnd_path])
+//     /*if (isEndTrial){
+//         this_url = form_url([notAuto_path]);
+//     } else {
+//         this_url = form_url([isAuto_path]);
+//     }*/
+//     //get_request(this_url);
+//     //isEndTrial = !isEndTrial;
+//     setToggleStyle(endBtnEl);
+// }
 
 const level_bin = (amt, levels) => {
 
@@ -214,6 +247,16 @@ let button_setup = () => {
     isAutoEl.onclick = ((e)=>{
         toggleAutoHandler();
     })
+
+    toggleTrialBtnEl = document.getElementById('toggleTrial');
+    toggleTrialBtnEl.onclick = ((e)=>{
+        toggleTrialHandler();
+    })
+
+    // endBtnEl = document.getElementById('endTrial');
+    // isAutoEl.onclick = ((e)=>{
+    //     toggleEndHandler();
+    // })
 
 
     frontBtnEl = document.getElementById('frontBtn');

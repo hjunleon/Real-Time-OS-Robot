@@ -31,6 +31,14 @@
                 </div>
             </div>
         </div>
+        <div id="footer">
+            <div class="trialBtn">
+                <button type="button" id="toggleTrial">START</button>
+            </div>
+            <!-- <div class="trialBtn">
+                <button type="button" id="endTrial">END</button>
+            </div> -->
+        </div>
     </body>
     <style>
         .noselect {
@@ -54,6 +62,17 @@
             left:0;
             top:0;
         }
+
+        #footer{
+            position:absolute;
+            bottom: 0;
+            right:0;
+        }
+
+        #isAutoWrap > button, .trialBtn > button {
+            padding: 8px 16px;
+        }
+
         .main{
             display: flex;
             justify-content: center;
@@ -99,6 +118,10 @@
         #leftBtn, #rightBtn, #frontBtn, #backBtn{
             height: 40%;
             width: 30%;
+        }
+        .activeState {
+            background-color: green;
+            color: white;
         }
         /* #leftBtn:hover, #rightBtn:hover{
             background-color: green;
