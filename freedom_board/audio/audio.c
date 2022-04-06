@@ -8,13 +8,15 @@
 #define PTB0_Pin 0
 #define PTB1_Pin 1
 
-#define ONE_BEAT 320//175000//500000 (suitable for russian anthem)
+#define ONE_BEAT 350//320 // 175000//500000 (suitable for russian anthem)
 #define TWO_BEAT ONE_BEAT * 2
 #define FOUR_BEAT TWO_BEAT * 2
 #define ONE_HALF_BEAT ONE_BEAT * 1.5
 #define THREE_BEAT ONE_BEAT * 3
 #define HALF_BEAT ONE_BEAT / 2
+#define TRIPLET_BEAT ONE_BEAT / 3
 #define QUARTER_BEAT HALF_BEAT / 2
+#define SIXTH_BEAT HALF_BEAT / 3
 #define EIGTH_BEAT QUARTER_BEAT/2
 #define SIXTEENTH_BEAT EIGTH_BEAT/2
 #define DOTTED_HALF_BEAT ONE_BEAT / 1.5
@@ -24,7 +26,10 @@
 #define MUSICAL_NOTE_CNT 52
 #define END_NOTE_CNT 28
 
-audioToPlay cur_audio = CONNECT;
+audioToPlay cur_audio = NONE;
+audioToPlay new_audio = NONE;
+
+unsigned int changeAudio = 0;
 
 void initPWM(void)
 {
@@ -57,56 +62,41 @@ static void delay(volatile uint32_t nof){
 void initAudio(void) {
 	initPWM();
 }
-/*
-int song[52] = {
-	C,F,F,G,F,E,D,D,
-	D,G,G,A,G,F,E,C,
-	C,A,A,B,A,G,F,D,
-	C,C,D,G,E,F,
-
-	C,F,F,F,E,
-	E,F,E,D,C,
-	G,A,G,F,C,C,
-	C,C,D,G,E,F,
-};
- 
-int c_g[2] = {
-	G,C
-};
-
-int f_b[2] = {
-	B,E
-};
-*/
-int no_idea[5] = {
-	3750, 5800, 4580, 4900, 2340
-};
-
-int no_idea2[5] = {
-	6500, 7400, 7500, 3750, 1800
-};
 
 
 //int end[28] = {C,C,G,G,A,A,G,F,F,E,E,D,D,C,G,G,F,F,E,E,D,G,G,F,F,E,E,D};
  
-#define RUSSIAN_LEN 13
+#define RUSSIAN_LEN 123
 #define RUSSIAN_SPEED 1
 int russian_anthem[RUSSIAN_LEN][2] = {
 	{G4, HALF_BEAT}, //1
 	{C5, ONE_BEAT}, {G4, DOTTED_HALF_BEAT}, {A4, QUARTER_BEAT}, {B4, ONE_BEAT}, {E4, DOTTED_HALF_BEAT}, {E4, QUARTER_BEAT}, // 6
-	{A4, ONE_BEAT}, {F4, DOTTED_HALF_BEAT}, {G4, QUARTER_BEAT}, {A4, ONE_BEAT}, {D4, DOTTED_HALF_BEAT}, {D4, QUARTER_BEAT}, //6
+	{A4, ONE_BEAT}, {G4, DOTTED_HALF_BEAT}, {F4, QUARTER_BEAT}, {G4, ONE_BEAT}, {C4, DOTTED_HALF_BEAT}, {C4, QUARTER_BEAT}, //6
+	{D4, ONE_BEAT}, {D4, DOTTED_HALF_BEAT}, {E4, QUARTER_BEAT}, {F4, ONE_BEAT}, {F4, DOTTED_HALF_BEAT}, {G4, QUARTER_BEAT},
+	{A4, ONE_BEAT}, {B4, HALF_BEAT}, {C5, HALF_BEAT}, {D5,ONE_HALF_BEAT}, {G4, HALF_BEAT},
+	{E5, ONE_BEAT}, {D5, DOTTED_HALF_BEAT}, {C5, QUARTER_BEAT}, {D5, ONE_BEAT}, {B4,HALF_BEAT}, {E4, HALF_BEAT},
+	{C5, ONE_BEAT}, {B4, DOTTED_HALF_BEAT}, {A4, QUARTER_BEAT}, {B4, ONE_BEAT},  {G4, HALF_BEAT}, {E4, HALF_BEAT},
+	{A5, ONE_BEAT}, {G5, DOTTED_HALF_BEAT}, {F4, QUARTER_BEAT}, {G4, ONE_BEAT}, {C4, DOTTED_HALF_BEAT} , {C4, QUARTER_BEAT},
+	{C5, ONE_BEAT}, {B4, DOTTED_HALF_BEAT}, {A4, QUARTER_BEAT}, {G4, HALF_BEAT}, {B4, HALF_BEAT}, {C5, HALF_BEAT}, {D5, HALF_BEAT},
+	{E5, ONE_HALF_BEAT}, {REST, HALF_BEAT}, {G6, TWO_BEAT}, 
+	{REST, HALF_BEAT}, {G6, SIXTH_BEAT},{G6, SIXTH_BEAT},{G6, SIXTH_BEAT},{G6, TWO_BEAT}, {REST, ONE_BEAT},
+	{C5, ONE_HALF_BEAT}, {REST,HALF_BEAT}, {E6, TWO_BEAT}, 
+	{REST, HALF_BEAT}, {E6, SIXTH_BEAT},{E6, SIXTH_BEAT},{E6, SIXTH_BEAT},{E6, ONE_HALF_BEAT}, {G4, HALF_BEAT}, {A4, HALF_BEAT}, {B4, HALF_BEAT},
+	{A4, ONE_BEAT}, {G4, DOTTED_HALF_BEAT}, {F4, QUARTER_BEAT}, {G4, ONE_BEAT}, {C4, DOTTED_HALF_BEAT} , {C4, QUARTER_BEAT},
+	{C5, ONE_BEAT}, {B4, DOTTED_HALF_BEAT}, {A4, QUARTER_BEAT}, {G4, ONE_BEAT},{REST, HALF_BEAT}
+	
 };
 
 
 
-#define DEJAVU_LEN 130
+#define DEJAVU_LEN 200
 #define DEJAVU_SPEED 0.55
 int dejavu[DEJAVU_LEN][2] = {
-	{REST, ONE_BEAT},{As6,HALF_BEAT},{As6,HALF_BEAT},{F6,ONE_HALF_BEAT},
-	{REST, ONE_BEAT},{As6,HALF_BEAT},{As6,HALF_BEAT},{F6,ONE_HALF_BEAT},
+	{REST, ONE_BEAT},{As6,HALF_BEAT},{As6,ONE_BEAT},{F6,ONE_BEAT},
+	{REST, ONE_BEAT},{As6,HALF_BEAT},{As6,ONE_BEAT},{F6,ONE_BEAT},
 	{REST, HALF_BEAT}, {As5, HALF_BEAT}, {D6,HALF_BEAT}, {As5, HALF_BEAT}, {D6, HALF_BEAT}, {As5, HALF_BEAT}, {D6, HALF_BEAT},
 	{Ds6, ONE_HALF_BEAT}, {REST, HALF_BEAT}, {G6, ONE_BEAT}, {F6, HALF_BEAT}, {Ds6, HALF_BEAT}, {D6, HALF_BEAT},
-	{REST, ONE_BEAT},{As6,HALF_BEAT},{As6,HALF_BEAT},{F6,ONE_HALF_BEAT},
+	{REST, ONE_BEAT},{As6,HALF_BEAT},{As6,ONE_BEAT},{F6,ONE_BEAT},
 	{REST, ONE_BEAT}, {Ds5,HALF_BEAT}, {Ds5,HALF_BEAT}, {D5, HALF_BEAT}, {C5, HALF_BEAT}, {As4, ONE_BEAT},  //6
 	{C5, ONE_BEAT},{C5,HALF_BEAT},{F5,QUARTER_BEAT},{G5,QUARTER_BEAT},{C6,QUARTER_BEAT},{C6,QUARTER_BEAT},{F6,QUARTER_BEAT},{G6,QUARTER_BEAT},{C7,QUARTER_BEAT},{C7,QUARTER_BEAT},{F7,QUARTER_BEAT},{G7,QUARTER_BEAT},{C8,HALF_BEAT},
 	{REST, ONE_HALF_BEAT}, {REST,HALF_BEAT},{C6, HALF_BEAT}, {D6, HALF_BEAT}, {Ds6, ONE_HALF_BEAT},  //6
@@ -126,9 +116,10 @@ int dejavu[DEJAVU_LEN][2] = {
 #define UNTITLED_SPEED 1
 
 int untitled[UNTITLED_LEN][2] = {
-	{REST, THREE_BEAT}, {REST, HALF_BEAT}, {Fs6,HALF_BEAT},
-	{F6, DOTTED_HALF_BEAT},{Fs6, DOTTED_HALF_BEAT},{Cs6, ONE_HALF_BEAT}, {F6,DOTTED_HALF_BEAT}, {Fs6,THREE_BEAT},
-	{Cs6,HALF_BEAT},{Fs6,HALF_BEAT}, {Fs6,QUARTER_BEAT}, {Gs6,DOTTED_HALF_BEAT}, 
+	{Fs6,HALF_BEAT},  //{REST, THREE_BEAT}, {REST, HALF_BEAT},
+	{F6, ONE_BEAT},{Fs6, ONE_BEAT},{Cs6, TWO_BEAT}, 
+	{REST, HALF_BEAT},{F6,ONE_BEAT}, {Fs6,TWO_BEAT},
+	{REST, HALF_BEAT},{Cs6,HALF_BEAT},{Fs6,HALF_BEAT}, {Fs6,QUARTER_BEAT}, {Gs6,DOTTED_HALF_BEAT}, 
 	{As6, ONE_BEAT}, {Gs6, ONE_BEAT}, {Fs6, HALF_BEAT}, {Fs6, HALF_BEAT}, {Fs6, HALF_BEAT},
   {Fs6, HALF_BEAT}, {Ds6, ONE_BEAT}, {Cs6, ONE_HALF_BEAT}, {Fs6, HALF_BEAT}, {Fs6, HALF_BEAT},
 	{Fs6, HALF_BEAT}, {Gs6, HALF_BEAT}, {As6, HALF_BEAT}, {Gs6, ONE_BEAT}, {F6, ONE_BEAT}, {F6, HALF_BEAT},
@@ -151,23 +142,32 @@ int untitled[UNTITLED_LEN][2] = {
 };
 
 void play_internet_connect(void){
-	cur_audio = CONNECT;
-	play_audio();
+	new_audio = CONNECT;
+	//play_audio();
 }
 
 
 void play_run(void){
-	cur_audio = RUNNING;
-	play_audio();
+	new_audio = RUNNING;
+	//play_audio();
 }
 
 void play_end(void){
-	cur_audio = END;
-	play_audio();
+	new_audio = END;
+	//play_audio();
 }
 
+void stop_music(void){
+	new_audio = NONE;
+}
 
 void play_audio(void) {
+	if (new_audio != cur_audio){
+			cur_audio = new_audio;
+	}
+	if (cur_audio == NONE){
+		return;
+	}
 	//unsigned int isFirst = 0;
 	//int i = 0;
 	double speed;
@@ -196,6 +196,10 @@ void play_audio(void) {
 	}
 	int j = 0;
 	while (j < length){			
+		if (new_audio != cur_audio){
+			cur_audio = new_audio;
+			return;
+		}
 		int duration = speed * cur_music[j][1];
 		TPM1->MOD = cur_music[j][0];
 		TPM1_C0V = cur_music[j][0] / 2; 
@@ -203,6 +207,9 @@ void play_audio(void) {
 		TPM1_C0V = 0;
 		osDelay(duration);
 		j++;
+	}
+	if (cur_audio == CONNECT){
+		stop_music();
 	}
 		
 }

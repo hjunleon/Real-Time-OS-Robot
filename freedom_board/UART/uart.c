@@ -1,5 +1,8 @@
 # include <MKL25Z4.h>
 #include "uart.h"
+#include "RTE_Components.h"
+#include  CMSIS_device_header
+#include "cmsis_os2.h"
 
 
 
@@ -11,8 +14,22 @@ void UART2_Transmit_Poll(uint8_t data)
 }*/
 uint8_t UART2_Receive_Poll(void)
 {
-	while(!(UART2->S1 & UART_S1_RDRF_MASK));
+	while(!(UART2->S1 & UART_S1_RDRF_MASK)){
+		osDelay(50);
+	};
 	return (UART2->D);
+}
+
+uint8_t UART2_IRQHandler(void) { 
+ NVIC_ClearPendingIRQ(UART2_IRQn); 
+ if (UART2_S1 & UART_S1_RDRF_MASK) { 
+	 //  push UART command queue
+  return (UART2->D); 
+	 
+  //MessageObject_t messageObject; 
+  //messageObject.message = serialValue; 
+  //osMessageQueuePut(brainMessageQueue, &messageObject, 0, 0); 
+ } 
 }
 
 void initUART2(uint32_t baud_rate)

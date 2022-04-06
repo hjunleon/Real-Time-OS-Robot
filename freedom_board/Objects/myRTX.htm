@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\myRTX.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\myRTX.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Apr 05 12:12:45 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Apr 07 03:18:39 2022
 <BR><P>
 <H3>Maximum Stack Usage =        120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -64,7 +64,7 @@ Function Pointers
  <LI><a href="#[25]">TSI0_IRQHandler</a> from startup_mkl25z4.o(.text) referenced from startup_mkl25z4.o(RESET)
  <LI><a href="#[17]">UART0_IRQHandler</a> from startup_mkl25z4.o(.text) referenced from startup_mkl25z4.o(RESET)
  <LI><a href="#[18]">UART1_IRQHandler</a> from startup_mkl25z4.o(.text) referenced from startup_mkl25z4.o(RESET)
- <LI><a href="#[19]">UART2_IRQHandler</a> from startup_mkl25z4.o(.text) referenced from startup_mkl25z4.o(RESET)
+ <LI><a href="#[19]">UART2_IRQHandler</a> from uart.o(i.UART2_IRQHandler) referenced from startup_mkl25z4.o(RESET)
  <LI><a href="#[23]">USB0_IRQHandler</a> from startup_mkl25z4.o(.text) referenced from startup_mkl25z4.o(RESET)
  <LI><a href="#[4d]">__main</a> from __main.o(!!!main) referenced from startup_mkl25z4.o(.text)
  <LI><a href="#[4b]">audio_thread</a> from main.o(i.audio_thread) referenced from main.o(i.main)
@@ -115,82 +115,82 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
 </UL>
 
-<P><STRONG><a name="[dc]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<P><STRONG><a name="[e3]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
 
-<P><STRONG><a name="[dd]"></a>__scatterload_null</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<P><STRONG><a name="[e4]"></a>__scatterload_null</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
 
-<P><STRONG><a name="[de]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
+<P><STRONG><a name="[e5]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
 
 <P><STRONG><a name="[5b]"></a>__rt_lib_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit.o(.ARM.Collect$$libinit$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_li
 </UL>
 
-<P><STRONG><a name="[df]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
+<P><STRONG><a name="[e6]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
 
-<P><STRONG><a name="[e0]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002C))
+<P><STRONG><a name="[e7]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002C))
 
-<P><STRONG><a name="[e1]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
+<P><STRONG><a name="[e8]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
 
-<P><STRONG><a name="[e2]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
+<P><STRONG><a name="[e9]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
 
-<P><STRONG><a name="[e3]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000032))
+<P><STRONG><a name="[ea]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000032))
 
-<P><STRONG><a name="[e4]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
+<P><STRONG><a name="[eb]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
 
-<P><STRONG><a name="[e5]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000002))
+<P><STRONG><a name="[ec]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000002))
 
-<P><STRONG><a name="[e6]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
+<P><STRONG><a name="[ed]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
 
-<P><STRONG><a name="[e7]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
+<P><STRONG><a name="[ee]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
 
-<P><STRONG><a name="[e8]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000A))
+<P><STRONG><a name="[ef]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000A))
 
-<P><STRONG><a name="[e9]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000011))
+<P><STRONG><a name="[f0]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000011))
 
-<P><STRONG><a name="[ea]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
+<P><STRONG><a name="[f1]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
 
-<P><STRONG><a name="[eb]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
+<P><STRONG><a name="[f2]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
 
-<P><STRONG><a name="[ec]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
+<P><STRONG><a name="[f3]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
 
-<P><STRONG><a name="[ed]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
+<P><STRONG><a name="[f4]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
 
-<P><STRONG><a name="[ee]"></a>__rt_lib_init_preinit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000004))
+<P><STRONG><a name="[f5]"></a>__rt_lib_init_preinit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000004))
 
-<P><STRONG><a name="[ef]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000E))
+<P><STRONG><a name="[f6]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000E))
 
-<P><STRONG><a name="[f0]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000033))
+<P><STRONG><a name="[f7]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000033))
 
-<P><STRONG><a name="[f1]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
+<P><STRONG><a name="[f8]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
 
-<P><STRONG><a name="[f2]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000025))
+<P><STRONG><a name="[f9]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000025))
 
-<P><STRONG><a name="[f3]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
+<P><STRONG><a name="[fa]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
 
 <P><STRONG><a name="[60]"></a>__rt_lib_shutdown</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown.o(.ARM.Collect$$libshutdown$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_ls
 </UL>
 
-<P><STRONG><a name="[f4]"></a>__rt_lib_shutdown_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000002))
+<P><STRONG><a name="[fb]"></a>__rt_lib_shutdown_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000002))
 
-<P><STRONG><a name="[f5]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000007))
+<P><STRONG><a name="[fc]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000007))
 
-<P><STRONG><a name="[f6]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
+<P><STRONG><a name="[fd]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
 
-<P><STRONG><a name="[f7]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000010))
+<P><STRONG><a name="[fe]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000010))
 
-<P><STRONG><a name="[f8]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A))
+<P><STRONG><a name="[ff]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A))
 
-<P><STRONG><a name="[f9]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000004))
+<P><STRONG><a name="[100]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000004))
 
-<P><STRONG><a name="[fa]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C))
+<P><STRONG><a name="[101]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C))
 
 <P><STRONG><a name="[54]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry.o(.ARM.Collect$$rtentry$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
 </UL>
 
-<P><STRONG><a name="[fb]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
+<P><STRONG><a name="[102]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
 
 <P><STRONG><a name="[56]"></a>__rt_entry_sh</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry4.o(.ARM.Collect$$rtentry$$00000004))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
@@ -211,14 +211,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[5c]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; initUltrasound &rArr; initEcho &rArr; initTPM2 &rArr; __NVIC_SetPriority
+<BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; initUltrasound &rArr; initEcho &rArr; initTPM2 &rArr; enableTPM2IRQ &rArr; __NVIC_SetPriority
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 </UL>
 
-<P><STRONG><a name="[fc]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
+<P><STRONG><a name="[103]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
 
 <P><STRONG><a name="[6c]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -228,7 +228,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown
 </UL>
 
-<P><STRONG><a name="[fd]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
+<P><STRONG><a name="[104]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
 
 <P><STRONG><a name="[61]"></a>__rt_exit_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
@@ -238,7 +238,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 
-<P><STRONG><a name="[fe]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy.o(.emb_text), UNUSED)
+<P><STRONG><a name="[105]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy.o(.emb_text), UNUSED)
 
 <P><STRONG><a name="[4c]"></a>Reset_Handler</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, startup_mkl25z4.o(.text))
 
@@ -343,9 +343,6 @@ Global Symbols
 <P><STRONG><a name="[18]"></a>UART1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_mkl25z4.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mkl25z4.o(RESET)
 </UL>
-<P><STRONG><a name="[19]"></a>UART2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_mkl25z4.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_mkl25z4.o(RESET)
-</UL>
 <P><STRONG><a name="[23]"></a>USB0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_mkl25z4.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mkl25z4.o(RESET)
 </UL>
@@ -383,7 +380,7 @@ Global Symbols
 <LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMessageQueuePostProcess
 </UL>
 
-<P><STRONG><a name="[ff]"></a>__rt_memcpy</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, rt_memcpy.o(.text), UNUSED)
+<P><STRONG><a name="[106]"></a>__rt_memcpy</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, rt_memcpy.o(.text), UNUSED)
 
 <P><STRONG><a name="[68]"></a>_memset_w</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, rt_memclr.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memclr_w
@@ -403,7 +400,7 @@ Global Symbols
 <LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMessageQueueNew
 </UL>
 
-<P><STRONG><a name="[100]"></a>__rt_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
+<P><STRONG><a name="[107]"></a>__rt_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
 
 <P><STRONG><a name="[99]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
@@ -411,33 +408,33 @@ Global Symbols
 <LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexNew
 </UL>
 
-<P><STRONG><a name="[101]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
+<P><STRONG><a name="[108]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
 
 <P><STRONG><a name="[6a]"></a>__rt_memclr_w</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset_w
 </UL>
 
-<P><STRONG><a name="[102]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+<P><STRONG><a name="[109]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
-<P><STRONG><a name="[103]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+<P><STRONG><a name="[10a]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
-<P><STRONG><a name="[104]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+<P><STRONG><a name="[10b]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
-<P><STRONG><a name="[d1]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, dfixi.o(.text))
+<P><STRONG><a name="[d7]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, dfixi.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = __aeabi_d2iz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
 </UL>
 
-<P><STRONG><a name="[105]"></a>_dfix</STRONG> (Thumb, 98 bytes, Stack size 12 bytes, dfixi.o(.text), UNUSED)
+<P><STRONG><a name="[10c]"></a>_dfix</STRONG> (Thumb, 98 bytes, Stack size 12 bytes, dfixi.o(.text), UNUSED)
 
-<P><STRONG><a name="[db]"></a>__aeabi_d2uiz</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, dfixui.o(.text))
+<P><STRONG><a name="[e2]"></a>__aeabi_d2uiz</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, dfixui.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_d2uiz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeToDistance
+<BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeToDistance
 </UL>
 
-<P><STRONG><a name="[106]"></a>_dfixu</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, dfixui.o(.text), UNUSED)
+<P><STRONG><a name="[10d]"></a>_dfixu</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, dfixui.o(.text), UNUSED)
 
 <P><STRONG><a name="[5e]"></a>exit</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, exit.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
@@ -449,7 +446,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[107]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+<P><STRONG><a name="[10e]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
 <P><STRONG><a name="[70]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
@@ -460,13 +457,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a2]"></a>__aeabi_uidivmod</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, aeabi_sdiv.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUART2
+<BR><BR>[Called By]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUART2
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
 </UL>
 
-<P><STRONG><a name="[108]"></a>__aeabi_idiv</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, aeabi_sdiv.o(.text), UNUSED)
+<P><STRONG><a name="[10f]"></a>__aeabi_idiv</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, aeabi_sdiv.o(.text), UNUSED)
 
-<P><STRONG><a name="[109]"></a>__aeabi_idivmod</STRONG> (Thumb, 326 bytes, Stack size 8 bytes, aeabi_sdiv.o(.text), UNUSED)
+<P><STRONG><a name="[110]"></a>__aeabi_idivmod</STRONG> (Thumb, 326 bytes, Stack size 8 bytes, aeabi_sdiv.o(.text), UNUSED)
 
 <P><STRONG><a name="[6e]"></a>__aeabi_i2d_normalise</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, dflti.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
@@ -476,27 +473,27 @@ Global Symbols
 <P><STRONG><a name="[6d]"></a>__aeabi_i2d</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, dflti.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d_normalise
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
 </UL>
 
-<P><STRONG><a name="[10a]"></a>_dflt</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflti.o(.text), UNUSED)
+<P><STRONG><a name="[111]"></a>_dflt</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflti.o(.text), UNUSED)
 
 <P><STRONG><a name="[6f]"></a>__aeabi_ui2d</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, dflti.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d_normalise
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeToDistance
+<BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeToDistance
 </UL>
 
-<P><STRONG><a name="[10b]"></a>_dfltu</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflti.o(.text), UNUSED)
+<P><STRONG><a name="[112]"></a>_dfltu</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflti.o(.text), UNUSED)
 
-<P><STRONG><a name="[d0]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 56 bytes, dmul.o(.text))
+<P><STRONG><a name="[d6]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 56 bytes, dmul.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = __aeabi_dmul
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeToDistance
+<BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeToDistance
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
 </UL>
 
-<P><STRONG><a name="[10c]"></a>_dmul</STRONG> (Thumb, 558 bytes, Stack size 56 bytes, dmul.o(.text), UNUSED)
+<P><STRONG><a name="[113]"></a>_dmul</STRONG> (Thumb, 558 bytes, Stack size 56 bytes, dmul.o(.text), UNUSED)
 
 <P><STRONG><a name="[57]"></a>__user_setup_stackheap</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
@@ -512,15 +509,15 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
 </UL>
 
-<P><STRONG><a name="[10d]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+<P><STRONG><a name="[114]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[10e]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+<P><STRONG><a name="[115]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[10f]"></a>__decompress</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
+<P><STRONG><a name="[116]"></a>__decompress</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
 
-<P><STRONG><a name="[110]"></a>__decompress1</STRONG> (Thumb, 86 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
+<P><STRONG><a name="[117]"></a>__decompress1</STRONG> (Thumb, 86 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
 
-<P><STRONG><a name="[111]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
+<P><STRONG><a name="[118]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
 <P><STRONG><a name="[93]"></a>OS_Tick_AcknowledgeIRQ</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, os_systick.o(.text.OS_Tick_AcknowledgeIRQ))
 <BR><BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxTick_Handler
@@ -542,20 +539,22 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxKernelStart
 </UL>
 
-<P><STRONG><a name="[ad]"></a>osDelay</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, rtx_delay.o(.text.osDelay))
+<P><STRONG><a name="[ab]"></a>osDelay</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, rtx_delay.o(.text.osDelay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = osDelay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLedStop
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLedMove
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLedMove
+<BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLedStop
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLedMove
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLedMove
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLED_thread
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_thread
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLED_thread
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_thread
 </UL>
 
-<P><STRONG><a name="[ce]"></a>osKernelGetState</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, rtx_kernel.o(.text.osKernelGetState), UNUSED, KEPT)
+<P><STRONG><a name="[d5]"></a>osKernelGetState</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, rtx_kernel.o(.text.osKernelGetState), UNUSED, KEPT)
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = osKernelGetState
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_kernel_is_active
@@ -570,7 +569,7 @@ Global Symbols
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[cc]"></a>osKernelStart</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, rtx_kernel.o(.text.osKernelStart))
+<P><STRONG><a name="[d3]"></a>osKernelStart</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, rtx_kernel.o(.text.osKernelStart))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = osKernelStart
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -601,10 +600,10 @@ Global Symbols
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryPoolAlloc
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handle_UART
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxTimerTick
 </UL>
 
@@ -890,7 +889,7 @@ Global Symbols
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
 </UL>
 
-<P><STRONG><a name="[ca]"></a>osSemaphoreNew</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, rtx_semaphore.o(.text.osSemaphoreNew))
+<P><STRONG><a name="[d1]"></a>osSemaphoreNew</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, rtx_semaphore.o(.text.osSemaphoreNew))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = osSemaphoreNew
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -909,14 +908,14 @@ Global Symbols
 <P><STRONG><a name="[44]"></a>osThreadExit</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, rtx_thread.o(.text.osThreadExit))
 <BR>[Address Reference Count : 1]<UL><LI> rtx_thread.o(.text.svcRtxThreadNew)
 </UL>
-<P><STRONG><a name="[cb]"></a>osThreadNew</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, rtx_thread.o(.text.osThreadNew))
+<P><STRONG><a name="[d2]"></a>osThreadNew</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, rtx_thread.o(.text.osThreadNew))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = osThreadNew
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[21]"></a>PIT_IRQHandler</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, ultrasound.o(i.PIT_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = PIT_IRQHandler &rArr; startMeasure
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = PIT_IRQHandler &rArr; startMeasure &rArr; enableTPM2IRQ &rArr; __NVIC_SetPriority
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startMeasure
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearTIF
@@ -936,7 +935,7 @@ Global Symbols
 <P><STRONG><a name="[2b]"></a>SystemInit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, system_mkl25z4.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mkl25z4.o(.text)
 </UL>
-<P><STRONG><a name="[1e]"></a>TPM2_IRQHandler</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, ultrasound.o(i.TPM2_IRQHandler))
+<P><STRONG><a name="[1e]"></a>TPM2_IRQHandler</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, ultrasound.o(i.TPM2_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = TPM2_IRQHandler &rArr; getDistance &rArr; timeToDistance &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDistance
@@ -944,10 +943,11 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_mkl25z4.o(RESET)
 </UL>
-<P><STRONG><a name="[ba]"></a>UART2_Receive_Poll</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, uart.o(i.UART2_Receive_Poll))
+<P><STRONG><a name="[19]"></a>UART2_IRQHandler</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, uart.o(i.UART2_IRQHandler))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handle_UART
 </UL>
-
+<BR>[Address Reference Count : 1]<UL><LI> startup_mkl25z4.o(RESET)
+</UL>
 <P><STRONG><a name="[a3]"></a>__ARM_common_switch8</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, rtx_config.o(i.__ARM_common_switch8))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __ARM_common_switch8
 </UL>
@@ -990,188 +990,229 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_postsh_1
 </UL>
 
-<P><STRONG><a name="[4b]"></a>audio_thread</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, main.o(i.audio_thread))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = audio_thread &rArr; play_run &rArr; play_audio &rArr; __aeabi_dmul
+<P><STRONG><a name="[4b]"></a>audio_thread</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, main.o(i.audio_thread))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = audio_thread &rArr; play_audio &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_run
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_internet_connect
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_end
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[ae]"></a>auto_obstacle_avoid</STRONG> (Thumb, 278 bytes, Stack size 16 bytes, main.o(i.auto_obstacle_avoid))
+<P><STRONG><a name="[ac]"></a>auto_obstacle_avoid</STRONG> (Thumb, 278 bytes, Stack size 16 bytes, main.o(i.auto_obstacle_avoid))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = auto_obstacle_avoid &rArr; just_stoppppp &rArr; osMessageQueuePut &rArr; osRtxPostProcess &rArr; osRtxErrorNotify &rArr; __ARM_common_switch8
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueuePut
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_motor_cmd
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_motor_cmd
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
 </UL>
 
-<P><STRONG><a name="[48]"></a>auto_thread</STRONG> (Thumb, 222 bytes, Stack size 8 bytes, main.o(i.auto_thread))
+<P><STRONG><a name="[48]"></a>auto_thread</STRONG> (Thumb, 296 bytes, Stack size 8 bytes, main.o(i.auto_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = auto_thread &rArr; auto_obstacle_avoid &rArr; just_stoppppp &rArr; osMessageQueuePut &rArr; osRtxPostProcess &rArr; osRtxErrorNotify &rArr; __ARM_common_switch8
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startUltrasound
+<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_music
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopUltrasound
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startUltrasound
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_run
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_end
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreRelease
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreAcquire
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueuePut
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_move_state
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_motor_cmd
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_move_state
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getPITTick
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_motor_cmd
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[d8]"></a>calc_left</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, motor.o(i.calc_left))
-<BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
+<P><STRONG><a name="[de]"></a>calc_left</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, motor.o(i.calc_left))
+<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
 </UL>
 
-<P><STRONG><a name="[d7]"></a>calc_left_back</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, motor.o(i.calc_left_back))
-<BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
+<P><STRONG><a name="[dd]"></a>calc_left_back</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, motor.o(i.calc_left_back))
+<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
 </UL>
 
-<P><STRONG><a name="[da]"></a>calc_right</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, motor.o(i.calc_right))
-<BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
+<P><STRONG><a name="[e0]"></a>calc_right</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, motor.o(i.calc_right))
+<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
 </UL>
 
-<P><STRONG><a name="[d9]"></a>calc_right_back</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, motor.o(i.calc_right_back))
-<BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
+<P><STRONG><a name="[df]"></a>calc_right_back</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, motor.o(i.calc_right_back))
+<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
 </UL>
 
 <P><STRONG><a name="[a0]"></a>clearTIF</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, ultrasound.o(i.clearTIF))
-<BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<BR><BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disablePIT
 <LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[b0]"></a>create_motor_cmd</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, motor.o(i.create_motor_cmd))
+<P><STRONG><a name="[ae]"></a>create_motor_cmd</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, motor.o(i.create_motor_cmd))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = create_motor_cmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
 </UL>
 
-<P><STRONG><a name="[a4]"></a>getDistance</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, ultrasound.o(i.getDistance))
+<P><STRONG><a name="[b6]"></a>disablePIT</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, ultrasound.o(i.disablePIT))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = disablePIT
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearTIF
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_DisableIRQ
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopUltrasound
+</UL>
+
+<P><STRONG><a name="[b8]"></a>disableTPM2</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, ultrasound.o(i.disableTPM2))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = disableTPM2
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopTPM2
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetTPM2
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_DisableIRQ
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDistance
+</UL>
+
+<P><STRONG><a name="[bb]"></a>enableTPM2IRQ</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, ultrasound.o(i.enableTPM2IRQ))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = enableTPM2IRQ &rArr; __NVIC_SetPriority
+</UL>
+<BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_ClearPendingIRQ
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startMeasure
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTPM2
+</UL>
+
+<P><STRONG><a name="[a4]"></a>getDistance</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, ultrasound.o(i.getDistance))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = getDistance &rArr; timeToDistance &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeToDistance
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopTPM2
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startTPM2
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetTPM2
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getTPMC1Value
+<BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeToDistance
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopTPM2
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startTPM2
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetTPM2
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getTPMC1Value
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disableTPM2
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TPM2_IRQHandler
 </UL>
 
-<P><STRONG><a name="[b6]"></a>getTPMC1Value</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, ultrasound.o(i.getTPMC1Value))
+<P><STRONG><a name="[b1]"></a>getPITTick</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, ultrasound.o(i.getPITTick))
+<BR><BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
+</UL>
+
+<P><STRONG><a name="[bf]"></a>getTPMC1Value</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, ultrasound.o(i.getTPMC1Value))
 <BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDistance
 </UL>
 
-<P><STRONG><a name="[bb]"></a>get_level</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, main.o(i.get_level))
+<P><STRONG><a name="[c4]"></a>get_level</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, main.o(i.get_level))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handle_UART
 </UL>
 
-<P><STRONG><a name="[b2]"></a>get_move_state</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, motor.o(i.get_move_state))
+<P><STRONG><a name="[b4]"></a>get_move_state</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, motor.o(i.get_move_state))
 <BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLED_thread
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLED_thread
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
 </UL>
 
-<P><STRONG><a name="[4a]"></a>greenLED_thread</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, main.o(i.greenLED_thread))
+<P><STRONG><a name="[4a]"></a>greenLED_thread</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, main.o(i.greenLED_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = greenLED_thread &rArr; greenLedMove &rArr; osDelay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLedStop
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLedMove
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_move_state
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLedStop
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLedMove
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_move_state
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[b8]"></a>greenLedMove</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, led.o(i.greenLedMove))
+<P><STRONG><a name="[c1]"></a>greenLedMove</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, led.o(i.greenLedMove))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = greenLedMove &rArr; osDelay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLED_thread
 </UL>
 
-<P><STRONG><a name="[b9]"></a>greenLedStop</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, led.o(i.greenLedStop))
+<P><STRONG><a name="[c2]"></a>greenLedStop</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, led.o(i.greenLedStop))
 <BR><BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;greenLED_thread
 </UL>
 
-<P><STRONG><a name="[46]"></a>handle_UART</STRONG> (Thumb, 352 bytes, Stack size 8 bytes, main.o(i.handle_UART))
+<P><STRONG><a name="[46]"></a>handle_UART</STRONG> (Thumb, 334 bytes, Stack size 8 bytes, main.o(i.handle_UART))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = handle_UART &rArr; osMessageQueuePut &rArr; osRtxPostProcess &rArr; osRtxErrorNotify &rArr; __ARM_common_switch8
 </UL>
-<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreRelease
+<BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_run
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_internet_connect
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_end
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreRelease
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreAcquire
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueuePut
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART2_Receive_Poll
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_level
+<LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART2_IRQHandler
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_level
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[bc]"></a>initAudio</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, audio.o(i.initAudio))
+<P><STRONG><a name="[c5]"></a>initAudio</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, audio.o(i.initAudio))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = initAudio
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPWM
+<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPWM
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[be]"></a>initEcho</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, ultrasound.o(i.initEcho))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = initEcho &rArr; initTPM2 &rArr; __NVIC_SetPriority
+<P><STRONG><a name="[c7]"></a>initEcho</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, ultrasound.o(i.initEcho))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = initEcho &rArr; initTPM2 &rArr; enableTPM2IRQ &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTPM2
+<BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTPM2
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUltrasound
+<BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUltrasound
 </UL>
 
-<P><STRONG><a name="[c9]"></a>initGreenLED</STRONG> (Thumb, 306 bytes, Stack size 0 bytes, led.o(i.initGreenLED))
+<P><STRONG><a name="[d0]"></a>initGreenLED</STRONG> (Thumb, 306 bytes, Stack size 0 bytes, led.o(i.initGreenLED))
 <BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c7]"></a>initMotor</STRONG> (Thumb, 314 bytes, Stack size 0 bytes, motor.o(i.initMotor))
+<P><STRONG><a name="[ce]"></a>initMotor</STRONG> (Thumb, 314 bytes, Stack size 0 bytes, motor.o(i.initMotor))
 <BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c0]"></a>initPIT</STRONG> (Thumb, 148 bytes, Stack size 8 bytes, ultrasound.o(i.initPIT))
+<P><STRONG><a name="[c9]"></a>initPIT</STRONG> (Thumb, 148 bytes, Stack size 8 bytes, ultrasound.o(i.initPIT))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = initPIT &rArr; __NVIC_SetPriority
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearTIF
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_ClearPendingIRQ
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startUltrasound
+<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startUltrasound
 </UL>
 
-<P><STRONG><a name="[bd]"></a>initPWM</STRONG> (Thumb, 150 bytes, Stack size 0 bytes, audio.o(i.initPWM))
-<BR><BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initAudio
+<P><STRONG><a name="[c6]"></a>initPWM</STRONG> (Thumb, 150 bytes, Stack size 0 bytes, audio.o(i.initPWM))
+<BR><BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initAudio
 </UL>
 
-<P><STRONG><a name="[c8]"></a>initRedLED</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, led.o(i.initRedLED))
+<P><STRONG><a name="[cf]"></a>initRedLED</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, led.o(i.initRedLED))
 <BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bf]"></a>initTPM2</STRONG> (Thumb, 220 bytes, Stack size 8 bytes, ultrasound.o(i.initTPM2))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = initTPM2 &rArr; __NVIC_SetPriority
+<P><STRONG><a name="[c8]"></a>initTPM2</STRONG> (Thumb, 204 bytes, Stack size 8 bytes, ultrasound.o(i.initTPM2))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = initTPM2 &rArr; enableTPM2IRQ &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startTPM2
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
-<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_ClearPendingIRQ
+<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startTPM2
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enableTPM2IRQ
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initEcho
+<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initEcho
 </UL>
 
-<P><STRONG><a name="[c5]"></a>initTrigger</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, ultrasound.o(i.initTrigger))
-<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUltrasound
+<P><STRONG><a name="[cc]"></a>initTrigger</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, ultrasound.o(i.initTrigger))
+<BR><BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUltrasound
 </UL>
 
-<P><STRONG><a name="[c3]"></a>initUART2</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, uart.o(i.initUART2))
+<P><STRONG><a name="[ca]"></a>initUART2</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, uart.o(i.initUART2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = initUART2
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
@@ -1179,53 +1220,53 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c4]"></a>initUltrasound</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, ultrasound.o(i.initUltrasound))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = initUltrasound &rArr; initEcho &rArr; initTPM2 &rArr; __NVIC_SetPriority
+<P><STRONG><a name="[cb]"></a>initUltrasound</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, ultrasound.o(i.initUltrasound))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = initUltrasound &rArr; initEcho &rArr; initTPM2 &rArr; enableTPM2IRQ &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTrigger
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initEcho
+<BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTrigger
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initEcho
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[d5]"></a>just_backward</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, motor.o(i.just_backward))
-<BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
+<P><STRONG><a name="[db]"></a>just_backward</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, motor.o(i.just_backward))
+<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
 </UL>
 
-<P><STRONG><a name="[d4]"></a>just_forward</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, motor.o(i.just_forward))
-<BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
+<P><STRONG><a name="[da]"></a>just_forward</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, motor.o(i.just_forward))
+<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
 </UL>
 
-<P><STRONG><a name="[d6]"></a>just_stop</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, motor.o(i.just_stop))
-<BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
+<P><STRONG><a name="[dc]"></a>just_stop</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, motor.o(i.just_stop))
+<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
 </UL>
 
-<P><STRONG><a name="[af]"></a>just_stoppppp</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, main.o(i.just_stoppppp))
+<P><STRONG><a name="[ad]"></a>just_stoppppp</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, main.o(i.just_stoppppp))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = just_stoppppp &rArr; osMessageQueuePut &rArr; osRtxPostProcess &rArr; osRtxErrorNotify &rArr; __ARM_common_switch8
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;util_delay
+<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;util_delay
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueuePut
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_motor_cmd
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_motor_cmd
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_obstacle_avoid
 </UL>
 
 <P><STRONG><a name="[5d]"></a>main</STRONG> (Thumb, 156 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = main &rArr; initUltrasound &rArr; initEcho &rArr; initTPM2 &rArr; __NVIC_SetPriority
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = main &rArr; initUltrasound &rArr; initEcho &rArr; initTPM2 &rArr; enableTPM2IRQ &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadNew
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreNew
+<BR>[Calls]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadNew
+<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreNew
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexNew
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueueNew
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelStart
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelStart
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelInitialize
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUltrasound
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUART2
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initRedLED
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initMotor
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGreenLED
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initAudio
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUltrasound
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initUART2
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initRedLED
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initMotor
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGreenLED
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initAudio
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
@@ -1234,11 +1275,11 @@ Global Symbols
 <P><STRONG><a name="[47]"></a>motor_thread</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, main.o(i.motor_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = motor_thread &rArr; osMessageQueueGet &rArr; osRtxPostProcess &rArr; osRtxErrorNotify &rArr; __ARM_common_switch8
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
+<BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_motors
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexAcquire
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueueGet
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
@@ -1256,158 +1297,174 @@ Global Symbols
 <P><STRONG><a name="[39]"></a>osRtxIdleThread</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, rtx_config.o(i.osRtxIdleThread))
 <BR>[Address Reference Count : 1]<UL><LI> rtx_thread.o(.text.osRtxThreadStartup)
 </UL>
-<P><STRONG><a name="[cf]"></a>play_audio</STRONG> (Thumb, 156 bytes, Stack size 48 bytes, audio.o(i.play_audio))
+<P><STRONG><a name="[aa]"></a>play_audio</STRONG> (Thumb, 220 bytes, Stack size 48 bytes, audio.o(i.play_audio))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = play_audio &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_music
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-</UL>
-<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_run
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_internet_connect
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_end
-</UL>
-
-<P><STRONG><a name="[ac]"></a>play_end</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, audio.o(i.play_end))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = play_end &rArr; play_audio &rArr; __aeabi_dmul
-</UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_thread
 </UL>
 
-<P><STRONG><a name="[aa]"></a>play_internet_connect</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, audio.o(i.play_internet_connect))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = play_internet_connect &rArr; play_audio &rArr; __aeabi_dmul
-</UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
-</UL>
-<BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_thread
+<P><STRONG><a name="[b2]"></a>play_end</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, audio.o(i.play_end))
+<BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handle_UART
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
 </UL>
 
-<P><STRONG><a name="[ab]"></a>play_run</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, audio.o(i.play_run))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = play_run &rArr; play_audio &rArr; __aeabi_dmul
-</UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
-</UL>
-<BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_thread
+<P><STRONG><a name="[c3]"></a>play_internet_connect</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, audio.o(i.play_internet_connect))
+<BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handle_UART
 </UL>
 
-<P><STRONG><a name="[49]"></a>redLED_thread</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, main.o(i.redLED_thread))
+<P><STRONG><a name="[b0]"></a>play_run</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, audio.o(i.play_run))
+<BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handle_UART
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
+</UL>
+
+<P><STRONG><a name="[49]"></a>redLED_thread</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, main.o(i.redLED_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = redLED_thread &rArr; redLedStop &rArr; osDelay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLedStop
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLedMove
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_move_state
+<BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLedStop
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLedMove
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_move_state
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[d2]"></a>redLedMove</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, led.o(i.redLedMove))
+<P><STRONG><a name="[d8]"></a>redLedMove</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, led.o(i.redLedMove))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = redLedMove &rArr; osDelay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLED_thread
 </UL>
 
-<P><STRONG><a name="[d3]"></a>redLedStop</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, led.o(i.redLedStop))
+<P><STRONG><a name="[d9]"></a>redLedStop</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, led.o(i.redLedStop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = redLedStop &rArr; osDelay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;redLED_thread
 </UL>
 
-<P><STRONG><a name="[b4]"></a>resetTPM2</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, ultrasound.o(i.resetTPM2))
-<BR><BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startMeasure
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDistance
+<P><STRONG><a name="[e1]"></a>resetPitTick</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, ultrasound.o(i.resetPitTick))
+<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startUltrasound
 </UL>
 
-<P><STRONG><a name="[cd]"></a>set_motors</STRONG> (Thumb, 306 bytes, Stack size 8 bytes, motor.o(i.set_motors))
+<P><STRONG><a name="[ba]"></a>resetTPM2</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, ultrasound.o(i.resetTPM2))
+<BR><BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startMeasure
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDistance
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disableTPM2
+</UL>
+
+<P><STRONG><a name="[d4]"></a>set_motors</STRONG> (Thumb, 306 bytes, Stack size 8 bytes, motor.o(i.set_motors))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = set_motors
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stop
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_forward
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_backward
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_right_back
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_right
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_left_back
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_left
+<BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stop
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_forward
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_backward
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_right_back
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_right
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_left_back
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_left
 </UL>
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_thread
 </UL>
 
-<P><STRONG><a name="[9f]"></a>startMeasure</STRONG> (Thumb, 40 bytes, Stack size 4 bytes, ultrasound.o(i.startMeasure))
-<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = startMeasure
+<P><STRONG><a name="[9f]"></a>startMeasure</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, ultrasound.o(i.startMeasure))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = startMeasure &rArr; enableTPM2IRQ &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopTPM2
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startTPM2
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetTPM2
+<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopTPM2
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startTPM2
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetTPM2
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enableTPM2IRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[b5]"></a>startTPM2</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, ultrasound.o(i.startTPM2))
+<P><STRONG><a name="[be]"></a>startTPM2</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, ultrasound.o(i.startTPM2))
 <BR><BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startMeasure
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTPM2
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTPM2
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDistance
 </UL>
 
-<P><STRONG><a name="[b1]"></a>startUltrasound</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, ultrasound.o(i.startUltrasound))
+<P><STRONG><a name="[af]"></a>startUltrasound</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, ultrasound.o(i.startUltrasound))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = startUltrasound &rArr; initPIT &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetPitTick
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
 </UL>
 
-<P><STRONG><a name="[b3]"></a>stopTPM2</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, ultrasound.o(i.stopTPM2))
+<P><STRONG><a name="[b9]"></a>stopTPM2</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, ultrasound.o(i.stopTPM2))
 <BR><BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startMeasure
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDistance
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disableTPM2
 </UL>
 
-<P><STRONG><a name="[b7]"></a>timeToDistance</STRONG> (Thumb, 30 bytes, Stack size 24 bytes, ultrasound.o(i.timeToDistance))
+<P><STRONG><a name="[b3]"></a>stopUltrasound</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, ultrasound.o(i.stopUltrasound))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = stopUltrasound &rArr; disablePIT
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disablePIT
+</UL>
+<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
+</UL>
+
+<P><STRONG><a name="[b5]"></a>stop_music</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, audio.o(i.stop_music))
+<BR><BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_audio
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auto_thread
+</UL>
+
+<P><STRONG><a name="[c0]"></a>timeToDistance</STRONG> (Thumb, 30 bytes, Stack size 24 bytes, ultrasound.o(i.timeToDistance))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = timeToDistance &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDistance
 </UL>
 
-<P><STRONG><a name="[c6]"></a>util_delay</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, utils.o(i.util_delay))
+<P><STRONG><a name="[cd]"></a>util_delay</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, utils.o(i.util_delay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = util_delay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;just_stoppppp
 </UL>
 <P>
 <H3>
 Local Symbols
 </H3>
 <P><STRONG><a name="[9e]"></a>__NVIC_ClearPendingIRQ</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, ultrasound.o(i.__NVIC_ClearPendingIRQ))
-<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTPM2
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<BR><BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enableTPM2IRQ
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TPM2_IRQHandler
 <LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[c2]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, ultrasound.o(i.__NVIC_EnableIRQ))
-<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTPM2
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<P><STRONG><a name="[b7]"></a>__NVIC_DisableIRQ</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, ultrasound.o(i.__NVIC_DisableIRQ))
+<BR><BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disableTPM2
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disablePIT
 </UL>
 
-<P><STRONG><a name="[c1]"></a>__NVIC_SetPriority</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, ultrasound.o(i.__NVIC_SetPriority))
+<P><STRONG><a name="[bd]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, ultrasound.o(i.__NVIC_EnableIRQ))
+<BR><BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enableTPM2IRQ
+</UL>
+
+<P><STRONG><a name="[bc]"></a>__NVIC_SetPriority</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, ultrasound.o(i.__NVIC_SetPriority))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __NVIC_SetPriority
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTPM2
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initPIT
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enableTPM2IRQ
 </UL>
 
 <P><STRONG><a name="[a5]"></a>os_kernel_is_active</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, rtx_lib.o(i.os_kernel_is_active), UNUSED, KEPT)
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = os_kernel_is_active &rArr; osKernelGetState
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelGetState
+<BR>[Calls]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelGetState
 </UL>
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_release
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_acquire

@@ -12,18 +12,14 @@
 volatile unsigned int ultra_dist = 0;
 volatile unsigned int pit_tick = 0;
 unsigned int echo_is_on = 0;
-unsigned int pit_ldval = 0x3fffff;  //0xfffff 0x2fffff  0x6fffff THIS IS THE DURATION THE ULTRASONIC SENSOR PINGS
-
+unsigned int pit_ldval = 0x150000; //34.8 Hz  //0xfffff 0x2fffff  0x6fffff THIS IS THE DURATION THE ULTRASONIC SENSOR PINGS
+unsigned int TPM2_CH0_count = 0;
+unsigned int isPITEnabled = 0;
 // TODO: Check for echo timeout
 
-/**
-CALL 	
-	initUltrasound();
-	startUltrasound();
-	in main.c
-
-*/
-
+void resetPitTick(){
+	pit_tick = 0;
+}
 void initEcho(void)
 {
 	initTPM2();
@@ -57,7 +53,9 @@ void initUltrasound(void){
 * Currently fixed to pit_ldval
 */
 void startUltrasound(void){   
+	resetPitTick();
 	initPIT();
+	isPITEnabled = 1;
 }
 
 void stopUltrasound(void){
@@ -92,35 +90,23 @@ void initTPM2() {
 	TPM2_C1SC |= TPM_CnSC_CHIE_MASK;
 	TPM2_C0V = 30; 
 		
-	NVIC_SetPriority(TPM2_IRQn, 0);
-	NVIC_ClearPendingIRQ(TPM2_IRQn);
-	NVIC_EnableIRQ(TPM2_IRQn);
+	enableTPM2IRQ();
 }
+
+
+
+
 
 void disableTPM2(void){
 	NVIC_DisableIRQ(TPM2_IRQn);
 	stopTPM2();
 	resetTPM2();
 }
-
-unsigned int getTPMC1Value(void){
-	return TPM2_C1V;
+void enableTPM2IRQ(void){
+	NVIC_SetPriority(TPM2_IRQn, 0);
+	NVIC_ClearPendingIRQ(TPM2_IRQn);
+	NVIC_EnableIRQ(TPM2_IRQn);
 }
-
-unsigned int getUltraDist(void){
-	return ultra_dist;
-}
-
-// either works
-void startMeasure(){
-	stopTPM2();
-	//Enable Output Compare Mode on Channel 0, to generate 10 microsec high pulse when timer starts
-	TPM2_C0SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK)); 
-	TPM2_C0SC |= (TPM_CnSC_ELSB_MASK | TPM_CnSC_MSA_MASK);
-	resetTPM2();
-	startTPM2();
-}
-
 
 void stopTPM2(){
 		TPM2_SC &= ~TPM_SC_CMOD_MASK;  // stop
@@ -133,7 +119,28 @@ void resetTPM2(){
 void startTPM2(){
 		TPM2_SC |= TPM_SC_CMOD(1);  // start counting
 }
+unsigned int getTPMC1Value(void){
+	return TPM2_C1V;
+}
 
+unsigned int getUltraDist(void){
+	return ultra_dist;
+}
+
+unsigned int getPITTick(void){
+	return pit_tick;
+}
+
+// either works
+void startMeasure(){
+	stopTPM2();
+	//Enable Output Compare Mode on Channel 0, to generate 10 microsec high pulse when timer starts
+	TPM2_C0SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK)); 
+	TPM2_C0SC |= (TPM_CnSC_ELSB_MASK | TPM_CnSC_MSA_MASK);
+	resetTPM2();
+	enableTPM2IRQ();
+	startTPM2();
+}
 void getDistance(void){
 	if (!echo_is_on){
 		// start timer
@@ -146,6 +153,7 @@ void getDistance(void){
 		int echo_time = getTPMC1Value();
 		timeToDistance(echo_time);
 		echo_is_on = 0;
+		disableTPM2();
 	}
 }
 
@@ -170,7 +178,11 @@ void TPM2_IRQHandler(void){
 	if (TPM2_STATUS & TPM_STATUS_CH1F_MASK) {   
 		TPM2_STATUS |= TPM_STATUS_CH1F_MASK;
 		getDistance();
-	} else {
+	} else if (TPM2_STATUS & TPM_STATUS_CH0F_MASK) {
+		TPM2_CH0_count += 1;
+		//stopTPM2();
+		//resetTPM2();
+	}else {
 		TPM2_STATUS |= TPM_STATUS_TOF_MASK;
 	}
 }
@@ -209,9 +221,16 @@ void initPIT(void){
 }
 
 void disablePIT(){
+	if (!isPITEnabled){
+		return;
+	}
 	clearTIF();
+	PIT_TCTRL0 &= ~PIT_TCTRL_TEN_MASK;
 	NVIC_DisableIRQ(PIT_IRQn);
+	//PIT_MCR &= ~PIT_MCR_MDIS_MASK;
+	PIT_MCR = PIT_MCR_MDIS(1);
 	SIM_SCGC6 &= ~SIM_SCGC6_PIT_MASK;
+	isPITEnabled = 0;
 }
 
 void PIT_IRQHandler(void){

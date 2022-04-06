@@ -27,15 +27,23 @@ Project File Date:  04/04/2022
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling motor.c...
-motor\../motor/motor.h(30): warning:  #1295-D: Deprecated declaration get_move_state - give arg types
-  unsigned int get_move_state();
-motor\motor.c(269): warning:  #1-D: last line of file ends without a newline
-  }
-motor\motor.c: 2 warnings, 0 errors
+compiling audio.c...
+audio\audio.h(16): warning:  #1295-D: Deprecated declaration play_audio - give arg types
+  void play_audio();
+audio\audio.h(17): warning:  #1295-D: Deprecated declaration initAudio - give arg types
+  void initAudio();
+audio\audio.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif
+audio\audio.c(195): warning:  #111-D: statement is unreachable
+  			break;
+audio\audio.c(216): warning:  #1-D: last line of file ends without a newline
+  		   
+audio\audio.c(55): warning:  #177-D: function "delay"  was declared but never referenced
+  static void delay(volatile uint32_t nof){
+audio\audio.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=14136 RO-data=716 RW-data=14444 ZI-data=356  
-".\Objects\myRTX.axf" - 0 Error(s), 2 Warning(s).
+Program Size: Code=14488 RO-data=716 RW-data=15868 ZI-data=356  
+".\Objects\myRTX.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -70,26 +78,26 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.3.0
 
    * Component: ARM::CMSIS:RTOS2:Keil RTX5:Library:5.5.1
-      Source file:   CMSIS\RTOS2\RTX\Config\RTX_Config.c
-      Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
-      Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
-      Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
-      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
       Source file:   CMSIS\RTOS2\RTX\Template\Mutex.c
       Source file:   CMSIS\RTOS2\RTX\Template\Semaphore.c
-      Source file:   CMSIS\RTOS2\RTX\Template\main.c
+      Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
       Include file:  CMSIS\RTOS2\RTX\Config\RTX_Config.h
+      Source file:   CMSIS\RTOS2\RTX\Config\RTX_Config.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
+      Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
+      Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
+      Source file:   CMSIS\RTOS2\RTX\Template\main.c
       Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
-      Source file:   CMSIS\RTOS2\RTX\Template\Thread.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Timer.c
       Source file:   CMSIS\RTOS2\RTX\Source\rtx_lib.c
       Source file:   CMSIS\RTOS2\RTX\Template\svc_user.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Timer.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Thread.c
 
    * Component: Keil::Device:Startup:2.5.0
+      Source file:   Device\Source\ARM\startup_MKL25Z4.s
       Include file:  Device\Source\system_MKL25Z4.h
       Source file:   Device\Source\system_MKL25Z4.c
-      Source file:   Device\Source\ARM\startup_MKL25Z4.s
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

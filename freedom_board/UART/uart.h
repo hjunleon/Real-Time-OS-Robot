@@ -3,6 +3,8 @@
 #define UART_ME
 
 //uint8_t UART2_Receive_Poll(void);
+uint8_t UART2_IRQHandler(void);
+
 void initUART2(uint32_t baud_rate);
 #endif
 #define BAUD_RATE 9600
