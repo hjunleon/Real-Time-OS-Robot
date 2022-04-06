@@ -55,6 +55,9 @@ let rightBtnEl;
 let frontBtnEl;
 let backBtnEl;
 let toggleTrialBtnEl;
+let time_div;
+
+let timer_interval = null;
 // let endBtnEl;
 
 
@@ -194,8 +197,10 @@ let toggleAutoHandler = () => {
     console.log(`isAuto: ${isAuto}`)
     if (isAuto){
         this_url = form_url([notAuto_path]);
+        stop_timer();
     } else {
         this_url = form_url([isAuto_path]);
+        start_timer();
     }
     get_request(this_url);
     isAuto = !isAuto;
@@ -209,9 +214,11 @@ let toggleTrialHandler = () => {
     if (isStartTrial){
         this_url = form_url([isEnd_path]);
         toggleTrialBtnEl.innerHTML = "START";
+        stop_timer();
     } else {
         this_url = form_url([isStart_path]);
         toggleTrialBtnEl.innerHTML = "END";
+        start_timer();
     }
     get_request(this_url);
     isStartTrial = !isStartTrial;
@@ -240,6 +247,20 @@ const timer_count = (el) => {
         cur_time += 1;
         el.innerHTML= cur_time;
     }
+}
+
+const start_timer = () =>{
+    reset_timer();
+    timer_interval = setInterval(timer_count(time_div),1000) 
+}
+
+const stop_timer = () => {
+    clearInterval(timer_interval);
+}
+
+const reset_timer = () => {
+    cur_time = 0;
+    time_div.innerHTML = cur_time;
 }
 
 let button_setup = () => {
@@ -343,8 +364,7 @@ window.onload = (()=>{
 
     initWebSocket();
 
-    let time_div = document.getElementById("timer");
-    setInterval(timer_count(time_div),1000) 
+    time_div = document.getElementById("timer");
 
     button_setup();
     

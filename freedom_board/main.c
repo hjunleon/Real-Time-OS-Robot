@@ -327,6 +327,7 @@ void auto_thread(void *argument){
 			}
 		} 
 		if(!isAuto){
+			just_stoppppp();
 			stop_music();
 			stopUltrasound();
 			osSemaphoreRelease(autoStartSemaphore);
