@@ -9,13 +9,15 @@
 /*
 void UART2_Transmit_Poll(uint8_t data)
 {
-	while(!(UART2->S1 & UART_S1_TDRE_MASK));
+	while(!(UART2->S1 & UART_S1_TDRE_MASK)){
+		osDelay(50);
+	}
 	UART2->D = data;
 }*/
 uint8_t UART2_Receive_Poll(void)
 {
 	while(!(UART2->S1 & UART_S1_RDRF_MASK)){
-		osDelay(50);
+		osDelay(10);
 	};
 	return (UART2->D);
 }

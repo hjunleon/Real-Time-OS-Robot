@@ -194,7 +194,7 @@ let setToggleStyle = (btnEl, state) => {
 
 let toggleAutoHandler = () => {
     let this_url = "";
-    console.log(`isAuto: ${isAuto}`)
+    //console.log(`isAuto: ${isAuto}`)
     if (isAuto){
         this_url = form_url([notAuto_path]);
         stop_timer();
@@ -209,7 +209,7 @@ let toggleAutoHandler = () => {
 
 let toggleTrialHandler = () => {
     let this_url = "";
-    
+    //console.log(`isStartTrial: ${isStartTrial}`)
     //get_request(this_url);
     if (isStartTrial){
         this_url = form_url([isEnd_path]);
@@ -296,12 +296,12 @@ let button_setup = () => {
             // t_backward(5);
         })
         leftBtnEl.onmousedown = ((e)=>{
-            leftHandler(5);
+            leftHandler(3); //5
             // t_left(5);
         })
         rightBtnEl.onmousedown = ((e)=>{
             // console.log(e);
-            rightHandler(5);
+            rightHandler(3); //5
             // t_right(5);
         })
         

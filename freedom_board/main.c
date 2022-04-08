@@ -22,8 +22,7 @@
 #define NOAUTO_COMMAND 0x81
 #define INTERNET_CONNECT_CMD 0x20
 #define START_TRIAL_CMD 0x21
-#define END_TRIAL_CMD 0x22
-#define DISTANCE_THRESH 150//20
+#define END_TRIAL_CMD 0x22//230//220//300 good for spped 3 //350 abit too little for plugged in  //150//20  420 without backward braking
  //0x80, 120, 80, 200,105 130, 150, 250 just touch
  
  
@@ -52,6 +51,29 @@ osSemaphoreId_t autoStopSemaphore;
 osSemaphoreId_t autoStartSemaphore;
 osSemaphoreId_t ultrasonicSemaphore;
 
+/*
+const osThreadAttr_t uartPriority = {
+		.priority = osPriorityHigh2//osPriorityHigh//osPriorityAboveNormal//osPriorityHigh4
+};
+
+const osThreadAttr_t motorPriority = {
+		.priority = osPriorityHigh//osPriorityHigh
+};
+ const osThreadAttr_t autoPriority = {
+		.priority = osPriorityAboveNormal4//osPriorityAboveNormal
+};
+
+ const osThreadAttr_t greenPriority = {
+		.priority = osPriorityNormal //osPriorityLow
+}; 
+ 
+ const osThreadAttr_t redPriority = {
+		.priority = osPriorityNormal //osPriorityLow
+}; 
+ const osThreadAttr_t audioPriority = {
+		.priority = osPriorityBelowNormal//osPriorityLow//osPriorityNormal //osPriorityBelowNormal
+}; */
+
 const osThreadAttr_t uartPriority = {
 		.priority = osPriorityAboveNormal//osPriorityHigh//osPriorityAboveNormal//osPriorityHigh4
 };
@@ -64,15 +86,15 @@ const osThreadAttr_t motorPriority = {
 };
 
  const osThreadAttr_t greenPriority = {
-		.priority = osPriorityAboveNormal //osPriorityLow
+		.priority = osPriorityNormal //osPriorityLow
 }; 
  
  const osThreadAttr_t redPriority = {
-		.priority = osPriorityAboveNormal //osPriorityLow
+		.priority = osPriorityNormal //osPriorityLow
 }; 
  const osThreadAttr_t audioPriority = {
-		.priority = osPriorityAboveNormal//osPriorityLow//osPriorityNormal //osPriorityBelowNormal
-}; 
+		.priority = osPriorityBelowNormal//osPriorityLow//osPriorityNormal //osPriorityBelowNormal
+};
 
 
 /*----------------------------------------------------------------------------
@@ -192,11 +214,11 @@ void handle_UART(void *argument){
 			}
 		}
 		
-		//osDelay(50);
+		osDelay(1);
 	}
 }
 
-#define MOTOR_CMD_PAUSE 50//50
+#define MOTOR_CMD_PAUSE 15//50
 
 void motor_thread(void *argument){
 	motor_cmd motorMsg;
@@ -218,54 +240,94 @@ void just_stoppppp(){
 	osMessageQueuePut(motorMQ, &motorMsg2, NULL, 0 );
 	state = 0;
 }
-#define STOP_DELAY 400 //1000 abit too long for 7.97V
-#define TURN_DELAY 500 // 500 abit beyond 90 for 7.97V
-#define HALF_TURN_DELAY 320 //300 abit too much for 7.97V
-#define FORWARD_DELAY 450  //1000 abit too much for 7.97V, 800 too much for same voltage but 10cm away
+
+#define TIME_MULTIPLIER 2.1//1.87 //1.5//3 for 18V 4.5A //1.5
+#define STOP_DELAY 500//250 //1000 abit too long for 7.97V
+#define HALF_TURN_DELAY 280 / TIME_MULTIPLIER//300 for speed 2 350 //300 abit too much for 7.97V
+#define TURN_DELAY 1.9 * HALF_TURN_DELAY// 2.22   660 for speed 2 620 580 for 11.4V 650// 500 abit beyond 90 for 7.97V  ,, 550 too ittle for speed  18 V
+#define FORWARD_DELAY 600/ TIME_MULTIPLIER // 580 f0r 11.4V 800  for 11.4V with backward brake,  1750 for 18V    550  //450 1000 abit too much for 7.97V, 800 too much for same voltage but 10cm away
+#define TURN_SPEED 2
+
+#define LEFT_FORWARD_OFFSET 15 / TIME_MULTIPLIER
+#define RIGHT_FORWARD_OFFSET  LEFT_FORWARD_OFFSET * 3 // somehow *3 
+
+#define DISTANCE_THRESH 123 * TIME_MULTIPLIER //113 for box
+
+
 void auto_obstacle_avoid(void){
 	motor_cmd motorMsg;
 	just_stoppppp();
-	osDelay(STOP_DELAY);
+	osDelay(100);
 	
-	motorMsg = create_motor_cmd(5, LEFT);
+	motorMsg = create_motor_cmd(5, BACKWARD);
+	osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+	osDelay(20);	
+	
+	just_stoppppp();
+	osDelay(200);
+	
+	motorMsg = create_motor_cmd(TURN_SPEED, LEFT);
 	osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 	osDelay(HALF_TURN_DELAY);
-	state = 1;
+	//state = 1;
 	
 	just_stoppppp();
 	osDelay(STOP_DELAY);
 	
 	
-	motorMsg = create_motor_cmd(5, FORWARD);
+	motorMsg = create_motor_cmd(2, FORWARD);
 	osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
-	osDelay(TURN_DELAY);
-	state = 1;
+	osDelay(FORWARD_DELAY - LEFT_FORWARD_OFFSET);
 	
 	just_stoppppp();
 	osDelay(STOP_DELAY);
 	
+	/*
+	just_stoppppp();
+	osDelay(100);
+	
+	
+	motorMsg = create_motor_cmd(1, BACKWARD);
+	osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+	osDelay(10);	
+	
+	
+	just_stoppppp();
+	osDelay(200);
+	*/
 	for(uint8_t i = 0; i < 3; i += 1){		
-		motorMsg = create_motor_cmd(5, RIGHT);
+		motorMsg = create_motor_cmd(TURN_SPEED, RIGHT);
 		osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 		osDelay(TURN_DELAY);
-		state = 1;
 		
 		just_stoppppp();
 		osDelay(STOP_DELAY);
 		
-		motorMsg = create_motor_cmd(5, FORWARD);
+		motorMsg = create_motor_cmd(2, FORWARD);
 		osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
-		osDelay(FORWARD_DELAY);
-		state = 1;
+		osDelay(FORWARD_DELAY + RIGHT_FORWARD_OFFSET);
+		
 		
 		just_stoppppp();
 		osDelay(STOP_DELAY);
+		
+		/*
+		just_stoppppp();
+		osDelay(100);
+				
+		motorMsg = create_motor_cmd(1, BACKWARD);
+		osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
+		osDelay(10);	
+		
+		
+		just_stoppppp();
+		osDelay(200);
+		*/
 	}
 	
-	motorMsg = create_motor_cmd(5, LEFT);
+	motorMsg = create_motor_cmd(TURN_SPEED, LEFT);
 	osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
-	osDelay(HALF_TURN_DELAY);
-	state = 1;
+	osDelay(HALF_TURN_DELAY );
 	
 	just_stoppppp();
 	osDelay(STOP_DELAY);
@@ -290,6 +352,7 @@ void auto_thread(void *argument){
 		if (isFirstObstacle && !isSecondObstacle && (getPITTick() - auto_first_pit_ticks >= first_obstacle_pit_ticks)){
 			// stop at start point
 			isSecondObstacle = 1;
+			osDelay(25); // stop beyond the line 
 			just_stoppppp();
 			play_end();
 			stopUltrasound();
@@ -307,22 +370,28 @@ void auto_thread(void *argument){
 					startTrial = 0;
 				}*/
 			} else {
+				
+				
 				if (low_ultra_dist_counts >= DISTANCE_THRESH_CNT){					
 					// get time taken to first obstacle
 					auto_first_pit_ticks = getPITTick();
 					first_obstacle_pit_ticks = auto_first_pit_ticks - auto_start_pit_ticks;
+					// stop ultrasound and PIT 
+					//stopUltrasound();
+					disableTPM2();
+					
 					// go around obstacle
 					isFirstObstacle = 1;
 					auto_obstacle_avoid();
+					osDelay(500);
 					auto_first_pit_ticks = getPITTick();
 					low_ultra_dist_counts = 0;
 				}
 			}
-			osDelay(1000);
 		} else{
 			low_ultra_dist_counts = 0;
 			if(!get_move_state() && !isSecondObstacle){				
-				motor_cmd motorMsg = create_motor_cmd(2, FORWARD);
+				motor_cmd motorMsg = create_motor_cmd(5, FORWARD); //2 seems to drift, 3 also drifting, 4 drifted somehow
 				osMessageQueuePut(motorMQ, &motorMsg, NULL, 0 );
 			}
 		} 
@@ -334,7 +403,7 @@ void auto_thread(void *argument){
 			isRun = 0;
 		}
 		
-		//osDelay(20);
+		osDelay(20);
 	}
 }
  
@@ -350,7 +419,7 @@ void redLED_thread(void *argument){
 			break;
 				
 		}
-		osDelay(50);
+		osDelay(150);
 	}
 }
 
@@ -365,7 +434,7 @@ void greenLED_thread(void *argument){
 			break;
 				
 		}
-		osDelay(50);
+		osDelay(150);
 	}
 }
 
@@ -386,7 +455,7 @@ void audio_thread(void *argument){
 			play_end();
 		}*/
 		play_audio();
-		osDelay(250);
+		osDelay(500);
 		//osDelay(100);
 	}
 }

@@ -58,9 +58,21 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     } else if (match_string(data,"b/5")) {
       UART_SEND(0x55);
       response = "BACKWARD 5";
+    } else if (match_string(data,"l/2")){
+      UART_SEND(0x62);
+      response = "LEFT 2";  
+    } else if (match_string(data,"l/3")){
+      UART_SEND(0x63);
+      response = "LEFT 3";  
     } else if (match_string(data,"l/5")) {
       UART_SEND(0x65);
       response = "LEFT 5";
+    } else if (match_string(data,"r/2")){
+      UART_SEND(0x71);
+      response = "RIGHT 2";  
+    } else if (match_string(data,"r/3")){
+      UART_SEND(0x73);
+      response = "RIGHT 3";  
     } else if (match_string(data,"r/5")) {
       UART_SEND(0x75);
       response = "RIGHT 5";

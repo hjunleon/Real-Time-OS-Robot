@@ -90,7 +90,7 @@ int russian_anthem[RUSSIAN_LEN][2] = {
 
 
 #define DEJAVU_LEN 200
-#define DEJAVU_SPEED 0.55
+#define DEJAVU_SPEED 0.6  // 0.55 is actual, but may need slow down so that it dont affect the autonomous
 int dejavu[DEJAVU_LEN][2] = {
 	{REST, ONE_BEAT},{As6,HALF_BEAT},{As6,ONE_BEAT},{F6,ONE_BEAT},
 	{REST, ONE_BEAT},{As6,HALF_BEAT},{As6,ONE_BEAT},{F6,ONE_BEAT},

@@ -171,7 +171,7 @@ void calc_right(uint8_t level){
 
 	//CUR_TPM0_C0V += MAX_TPM_VAL;
 	//CUR_TPM1_C0V -= MAX_TPM_VAL;
-	unsigned int turn_amt = MAX_TPM_VAL;//level * MIN_TPM_TURN;
+	unsigned int turn_amt = level * MIN_TPM_TURN;//level * MIN_TPM_TURN;
 		CUR_TPM0_C0V += turn_amt; //left forward
 		CUR_TPM0_C1V = 0; // left backward
 		if (turn_amt > CUR_TPM1_C0V){ //right forward 
@@ -186,7 +186,7 @@ void calc_right(uint8_t level){
 }
 
 void calc_right_back(uint8_t level){
-	unsigned int turn_amt = MAX_TPM_VAL;//level * MIN_TPM_TURN;
+	unsigned int turn_amt = level * MIN_TPM_TURN;//level * MIN_TPM_TURN; //MAX_TPM_VAL;
 		CUR_TPM0_C1V += turn_amt;
 		CUR_TPM0_C0V = 0;
 		if (turn_amt > CUR_TPM1_C1V){
@@ -201,7 +201,7 @@ void calc_right_back(uint8_t level){
 }
 
 void calc_left(uint8_t level){
-	unsigned int turn_amt = MAX_TPM_VAL;//level * MIN_TPM_TURN;
+	unsigned int turn_amt = level * MIN_TPM_TURN;//level * MIN_TPM_TURN;
 	CUR_TPM1_C0V += turn_amt;
 	CUR_TPM1_C1V = 0;
 	if (turn_amt > CUR_TPM0_C0V){
@@ -217,7 +217,7 @@ void calc_left(uint8_t level){
 
 }
 void calc_left_back(uint8_t level){
-	unsigned int turn_amt = MAX_TPM_VAL;//level * MIN_TPM_TURN;
+	unsigned int turn_amt = level * MIN_TPM_TURN;//level * MIN_TPM_TURN;
 	CUR_TPM1_C1V += turn_amt;
 	CUR_TPM1_C0V = 0;
 	if (turn_amt > CUR_TPM0_C1V){
